@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
+/*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2019/12/10 15:26:47 by wdeltenr         ###   ########.fr       */
+/*   Created: 2019/12/10 15:59:44 by gdrion            #+#    #+#             */
+/*   Updated: 2019/12/10 15:59:46 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@
 **
 */
 
-typedef char		t_arg_type;
+typedef char	t_arg_type;
 
 #define T_REG					1
 #define T_DIR					2
@@ -63,14 +63,14 @@ typedef char		t_arg_type;
 **
 */
 
-#define PROG_NAME_LENGTH		(128)
+# define PROG_NAME_LENGTH		(128)
 # define COMMENT_LENGTH			(2048)
 # define COREWAR_EXEC_MAGIC		0xea83f3
 
 typedef struct		header_s
 {
-	unsigned		itmagic;
-	char			prog_name[PROG_NAME_LENGTH + 1];
-	unsigned int	prog_size;
-	char			comment[COMMENT_LENGTH + 1];
+  unsigned int		magic;
+  char				prog_name[PROG_NAME_LENGTH + 1];
+  unsigned int		prog_size;
+  char				comment[COMMENT_LENGTH + 1];
 }					header_t;
