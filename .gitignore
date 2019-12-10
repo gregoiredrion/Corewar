@@ -1,0 +1,5 @@
+vm_champs
+*.cor
+*.s
+asm
+obj
