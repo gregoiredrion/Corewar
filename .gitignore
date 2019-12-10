@@ -3,3 +3,5 @@ vm_champs
 *.s
 asm
 obj
+a.out
+*dSYM
