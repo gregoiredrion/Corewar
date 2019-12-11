@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 14:23:31 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/12/11 16:12:06 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/12/11 17:27:08 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,23 @@ static int	check_quotes(char *str)
 	return (i - 1);
 }
 
-char		*check_name_comment(int fd, const char *command)
+int			check_name_comment(int fd, const char *cmp, char **s)
 {
-	char	**split;
 	char	*line;
 	size_t	size;
+	char	**split;
 
 	if (get_next_line(fd, &line) == -1)
-		return (NULL);
+		return (MALLOC_ERROR);
 	if (!(split = ft_strsplit(line, '"')))
-		return (NULL);//free line and empty gnl
+		return (MALLOC_ERROR);//free line and empty gnl
 	if (!(size = check_quotes(line)))
-		return (NULL);//free split and write lexical error
+		return (ERROR);//free split and write lexical error
 	ft_strdel(&line);
 	if (!split[0] || !split[1] || split[2])
-		return (NULL);//free split and write lexical error
-	if (ft_strcmp(split[0], command))
-		return (NULL);//free split and write lexical error
-	return (split[1]);
+		return (ERROR);//free split and write lexical error
+	if (ft_strcmp(split[0], cmp))
+		return (ERROR);//free split and write lexical error
+	*s = split[1];
+	return (1);
 }

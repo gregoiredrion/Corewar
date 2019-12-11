@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 16:37:59 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/12/11 15:00:29 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/12/11 17:59:17 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 int		main(int argc, char **argv)
 {
-	t_core	*core;
+	t_core	core;
+	int 	ret;
 
 	if (argc == 1)
 		return (usage());
-	if (!(core = create_core(argv)))
-		return (0);
+	ret = create_core(argv, &core);
+	if (ret == ERROR || ret == MALLOC_ERROR)
+		return (error_msg(ret));
 	return (0);
 }

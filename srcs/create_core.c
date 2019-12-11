@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_core.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 14:00:41 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/12/11 16:14:10 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/12/11 17:28:55 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,24 @@ static int	store_fd_flag(t_core *core, char **argv)
 	return (1);
 }
 
-t_core		*create_core(char **argv)
+int			create_core(char **argv, t_core *core)
 {
-	t_core	*core;
+	int		ret;
 
 	if (!(core = malloc(sizeof(t_core))))
-		return (NULL);
+		return (MALLOC_ERROR);
 	if (!(store_fd_flag(core, argv)))
-		return (NULL);//call usage and free
-	if (!(core->name = check_name_comment(core->fd, ".name ")))
-		return (NULL);
-	if (!(core->comment = check_name_comment(core->fd, ".comment ")))
-		return (NULL);
+		return (ERROR);//call usage and free
+	ret = check_name_comment(core->fd, ".name ", &(core->name));
+	if (ret == ERROR || ret == MALLOC_ERROR)
+		return (ret);
+	ret = check_name_comment(core->fd, ".comment ", &(core->comment));
+	if (ret == ERROR || ret == MALLOC_ERROR)
+		return (ret);
 	core->carry = 0;
 	core->size = 0;
 	core->bytes = NULL;
 	ft_printf("|NAME:| |%s|\n", core->name);
 	ft_printf("|COMMENT:| |%s|\n", core->comment);
-	return (core);
+	return (1);
 }

@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   asm.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 15:27:46 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/12/11 15:01:14 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/12/11 17:59:52 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ASM_H
 # define ASM_H
 
+# define MALLOC_ERROR -1
+# define ERROR 0
 # include "libft.h"
 # include "op.h"
 
@@ -41,7 +43,8 @@ typedef struct		s_op
 }					t_op;
 
 int		usage(void);
-t_core	*create_core(char **argv);
-char	*check_name_comment(int fd, const char *command);
+int		error_msg(int ret);
+int		create_core(char **argv, t_core *core);
+int		check_name_comment(int fd, const char *cmp, char **s);
 
 #endif

@@ -6,11 +6,20 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 16:08:12 by gdrion            #+#    #+#             */
-/*   Updated: 2019/12/11 13:53:43 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/12/11 18:00:25 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+int		error_msg(int ret)
+{
+	if (ret == MALLOC_ERROR)
+		ft_printf("Malloc error\n");
+	else
+		ft_printf("Error\n");
+	return (ret);
+}
 
 int		usage(void)
 {
