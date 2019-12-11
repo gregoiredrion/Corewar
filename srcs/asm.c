@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 16:37:59 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/12/10 16:38:03 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/12/11 15:00:29 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,11 @@
 
 int		main(int argc, char **argv)
 {
-	int		fd;
+	t_core	*core;
 
 	if (argc == 1)
 		return (usage());
-	else if (!check_validity(argv))
-		return (usage());
-	if (flag(argv[1]))
-	{
-		//store flagag in struct
-		fd = open(argv[2], O_RDONLY);
-	}
-	else
-		fd = open(argv[1], O_RDONLY);
+	if (!(core = create_core(argv)))
+		return (0);
 	return (0);
 }

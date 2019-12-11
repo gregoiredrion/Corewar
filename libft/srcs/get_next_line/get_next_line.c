@@ -6,7 +6,7 @@
 /*   By: gdrion <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/03 14:10:20 by gdrion            #+#    #+#             */
-/*   Updated: 2019/10/03 15:39:00 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/12/11 15:52:58 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static int		ft_read_next_line(t_list **list, const int fd,
 				return (1);
 		current = current->next;
 	}
-	while ((j = read(fd, buffer, BUFF_SIZE)) > 0 && write(1, buffer, j))
+	while ((j = read(fd, buffer, BUFF_SIZE)) > 0)
 	{
 		buffer[j] = '\0';
 		l = ft_new_line(fd, buffer, j);

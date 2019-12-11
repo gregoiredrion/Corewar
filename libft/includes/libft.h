@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 14:08:17 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/11/28 16:31:29 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/12/11 15:02:06 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <limits.h>
 # include <string.h>
 # include <wchar.h>
+# include <fcntl.h>
 # include "ft_printf.h"
 
 # define BUFF_SIZE 256
