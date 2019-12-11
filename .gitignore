@@ -5,3 +5,4 @@ asm
 obj
 a.out
 *dSYM
+libft.a
