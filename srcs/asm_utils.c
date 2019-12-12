@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.c                                              :+:      :+:    :+:   */
+/*   asm_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
+/*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/10 16:37:59 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/12/12 17:01:30 by wdeltenr         ###   ########.fr       */
+/*   Created: 2019/12/12 17:01:52 by wdeltenr          #+#    #+#             */
+/*   Updated: 2019/12/12 17:07:56 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int		main(int argc, char **argv)
+int		empty(char *line)
 {
-	t_cor	cor;
-	int 	ret;
+	size_t	i;
 
-	if (argc == 1)
-		return (usage());
-	if (create_cor(argv, &cor) == -1)
-		return (error_msg(-1));
-	return (0);
+	i = 0;
+	if (!line)
+		return (0);
+	while (line[i])
+	{
+		if (line[i] != '\t' && line[i] != ' ')
+			return (0);
+		i++;
+	}
+	return (1);
 }

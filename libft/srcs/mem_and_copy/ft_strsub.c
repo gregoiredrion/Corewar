@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/24 15:14:56 by wdeltenr          #+#    #+#             */
-/*   Updated: 2018/06/24 15:33:31 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/12/12 16:20:23 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ char	*ft_strsub(char const *s, unsigned int start, size_t len)
 		start++;
 	}
 	s_copy[i] = '\0';
+	free((char *)s);
 	return (s_copy);
 }
