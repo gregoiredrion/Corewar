@@ -6,13 +6,13 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 14:00:41 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/12/12 17:15:00 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/12/17 19:50:50 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int			create_cor(char **argv, t_cor *cor)
+int			create_cor(t_cor *cor)
 {
 	if (!(cor = malloc(sizeof(t_cor))))
 		return (MALLOC_ERROR);
@@ -22,7 +22,6 @@ int			create_cor(char **argv, t_cor *cor)
 	cor->comment = NULL;
 	cor->carry = 0;
 	cor->size = 0;
-	cor->size = line;
-	cor->bytes = NULL;
+	cor->line = 0;
 	return (1);
 }
