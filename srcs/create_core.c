@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 14:00:41 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/12/18 18:34:56 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/12/17 19:50:50 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ int			create_cor(t_cor *cor)
 	cor->comment = NULL;
 	cor->carry = 0;
 	cor->size = 0;
-	cor->size = 0;
-	return (1);
+	cor->line = 0;
+	return (OK);
 }
