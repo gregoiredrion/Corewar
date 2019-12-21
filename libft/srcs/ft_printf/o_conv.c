@@ -29,10 +29,8 @@ static char	*apply_prec_o(char *nbr, t_flags *f, int new, int len)
 {
 	char	*ret;
 	int		i;
-	int		save;
 
 	i = 0;
-	save = new;
 	if (f->hash && f->precision <= 0)
 		new++;
 	if (!(ret = ft_strnew(new + 1)))

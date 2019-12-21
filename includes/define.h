@@ -1,27 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   define.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/21 13:39:39 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/12/16 15:33:44 by wdeltenr         ###   ########.fr       */
+/*   Created: 2019/12/16 16:32:07 by wdeltenr          #+#    #+#             */
+/*   Updated: 2019/12/18 17:38:17 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef DEFINE_H
+# define DEFINE_H
 
-static int	ft_islower(int c)
-{
-	if (c >= 97 && c <= 122)
-		return (1);
-	return (0);
-}
+# define NAME 0
+# define NB_ARG 1
+# define ARG_TYPE 2
+# define OPCODE 3
+# define CYCLE_COST 4
+# define DESCRIPTION 5
+# define CODE_OCTET 6
+# define LABEL_SIZE 7
 
-int			ft_isalpha(int c)
+# define NB_ARG_ERROR 0
+# define TYPE_ARG_ERROR 1
+
+# define T_CMD 16
+# define T_STR 32
+# define T_INS 64
+# define T_SEP 128
+
+typedef enum
 {
-	if (ft_islower(c) == 1 || ft_isupper(c) == 1)
-		return (1);
-	return (0);
-}
+	false,
+	true
+}	t_bool;
+
+#endif

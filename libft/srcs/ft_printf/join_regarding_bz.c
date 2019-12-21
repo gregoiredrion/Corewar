@@ -72,14 +72,12 @@ char			*ft_buf_char(char *buf, char c, int info, int nb_bz)
 char			*join_regarding_bz(char *s1, int info1, char *s2, int info2)
 {
 	char	*s3;
-	int		save_info;
 	int		newlen;
 	int		i;
 
 	if (!s1 || !s2)
 		return (NULL);
 	i = 0;
-	save_info = info1 + info2 - 1;
 	newlen = ft_strlen_info(s1, info1) + ft_strlen_info(s2, info2);
 	if (!(s3 = ft_strnew(newlen)))
 		return (NULL);

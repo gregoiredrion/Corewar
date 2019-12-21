@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 14:08:17 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/12/11 15:02:06 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/12/16 15:33:26 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ char			*ft_strnstr(const char *haystack,
 size_t			ft_strlen(const char *str);
 int				ft_wstrlen(const wchar_t *wstr);
 int				ft_isalpha(int c);
+int				ft_isupper(int c);
 int				ft_isdigit(int c);
 int				ft_isalnum(int c);
 int				ft_isascii(int c);
