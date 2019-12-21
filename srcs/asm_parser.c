@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 16:19:12 by gdrion            #+#    #+#             */
-/*   Updated: 2019/12/19 18:45:19 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/12/21 10:54:32 by gregoiredrion    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,14 @@ int 		asm_parser(t_cor *cor, char *file)
 		return (MALLOC_ERROR);
 	while (i < cor->size)
 	{
-		printf("File = \n:%s:\n", cor->file + i);
 		i = skip_comment(cor->file, i, &(cor->line), &pos);
 		//get_token
-		printf("File = \n:%s:\n", cor->file + i);
 		if (!(i = skip_newline(cor->file, i, &(cor->line), &pos)))
 			return (0);
-		printf("File = \n:%s:\n", cor->file + i);
+		printf("Line = %zu - Pos = %zu - i = %zu\n", cor->line,pos, i);
+		printf("File start pos = :%s:\n", cor->file + pos);
+		printf("File start i = :%s:\n", cor->file + i);
+		printf("Error token [%03zu][%03zu]\n", cor->line, i - pos);
 		exit (1);
 	}
 	return (1);

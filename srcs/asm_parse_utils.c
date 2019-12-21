@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 14:21:47 by gdrion            #+#    #+#             */
-/*   Updated: 2019/12/19 18:46:29 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/12/21 10:39:49 by gregoiredrion    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ int			skip_newline(char *file, size_t i, size_t *line, size_t *pos)
 		}
 		i++;
 	}
-	printf("ret = %zu     -      i = %zu\n", ret, i);
+	printf("I = %zu\n", i);
+	printf("ret = %zu\n", ret);
 	return (ret == 0 ? i : ret);
 }
 
 int			skip_comment(char *file, size_t i, size_t *line, size_t *pos)
 {
-	printf("I = %zu\n", i);
 	while (file[i] &&file[i] == '#')
 	{
 		while (file[i] && file[i] != '\n')
@@ -53,8 +53,20 @@ int			skip_comment(char *file, size_t i, size_t *line, size_t *pos)
 			(*line)++;
 			*pos = i;
 		}
+		while (file[i] && (file[i] == '\t' || file[i] == ' ' || file[i] == '\n'))
+		{
+			if (file[i] == '\n')
+			{
+				(*line)++;
+				*pos = i + 1;
+			}
+			i++;
+		}
 	}
+	printf("I avant le skip %zu\n", i);
+	printf("pos avant le skip %zu\n", *pos);
 	i = skip_newline(file, i, line, pos);
+	printf("I apres le skip %zu\n", i);
 	if (!file[i])
 		return (0);
 	return (i);
