@@ -17,10 +17,11 @@ char	*ft_strndup(const char *s1, size_t n)
 	char	*ret;
 	char	*save;
 
-	if (!(ret = ft_strnew(n)))
+	if (!(ret = ft_strnew(n + 1)))
 		return (NULL);
 	save = ret;
-	while (n--)
+	while (*s1 && n--)
 		*ret++ = *s1++;
+	*ret = '\0';
 	return (save);
 }

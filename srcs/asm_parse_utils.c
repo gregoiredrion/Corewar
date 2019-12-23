@@ -36,9 +36,7 @@ int			skip_newline(char *file, size_t i, size_t *line, size_t *pos)
 		}
 		i++;
 	}
-	printf("I = %zu\n", i);
-	printf("ret = %zu\n", ret);
-	return (ret == 0 ? i : ret);
+	return (i);
 }
 
 int			skip_comment(char *file, size_t i, size_t *line, size_t *pos)
@@ -63,11 +61,8 @@ int			skip_comment(char *file, size_t i, size_t *line, size_t *pos)
 			i++;
 		}
 	}
-	printf("I avant le skip %zu\n", i);
-	printf("pos avant le skip %zu\n", *pos);
 	i = skip_newline(file, i, line, pos);
-	printf("I apres le skip %zu\n", i);
-	if (!file[i])
-		return (0);
+	//if (!file[i])
+		//return (0);
 	return (i);
 }

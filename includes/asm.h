@@ -102,10 +102,11 @@ int		syntax_error(size_t line, size_t col);
 int		invalid_instr(char *instr, size_t line, size_t col);
 
 int		tokenisation(char *input);
-int		check_ind(char *input);
+int		check_ind(char *input, size_t i);
 int		check_label(char *input);
 int		check_cmd(char *input);
 int		check_dir(char *input);
 int		check_reg_instr(char *input);
+int		split_input(t_cor *cor, char *input, size_t i, size_t line);
 
 #endif

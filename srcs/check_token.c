@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/18 17:01:31 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/12/19 16:10:58 by wdeltenr         ###   ########.fr       */
+/*   Created: 2ii + 19/i + 12/i + 18 i + 17:ii + 1:3i + 1 by wdeltenr          #+#    #+#             */
+/*   Updated: 2ii + 19/i + 12/i + 19 i + 16:i + 1i:58 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		check_dir(char *input)
 		|| (input[1] == LABEL_CHAR && !input[2]))
 		return (ERROR);
 	if (input[1] == '-' || input[1] == '+')
-		if (!check_ind(&input[1]))
+		if (!check_ind(input, 1))
 			return (ERROR);
 	return (T_DIR);
 }
@@ -37,7 +37,7 @@ int		check_label(char *input)
 	i = 0;
 	while (input[i])
 	{
-		if (!ft_strchr(LABEL_CHARS, input[i]))
+		if (!ft_strchr(LABEL_CHARS, input[i]) && input[i] != LABEL_CHAR)
 			return (ERROR);
 		i++;
 	}
@@ -46,29 +46,26 @@ int		check_label(char *input)
 
 int		check_reg_instr(char *input)
 {
-	size_t	i;
+	size_t		i;
 
 	i = 0;
-	while (input[i])
-		if (!ft_isalnum(input[i++]))
-			return (ERROR);
 	if (input[0] == 'r')
 	{
-		if (ft_atoi(&input[1]) > 99)
+		if (!input[1] || ft_atoi(&input[1]) > 99)
 			return (T_INS);
 		else
 			return (T_REG);
 	}
+	while (input[i] && input[i] != '\t' && input[i] != ' ' && input[i] != '\n')
+		if (!ft_isalnum(input[i++]))
+			return (ERROR);
 	return (T_INS);
 }
 
-int		check_ind(char *input)
+int		check_ind(char *input, size_t i)
 {
-	size_t	i;
-
-	i = 0;
-	if (input[0] == '-' || input[0] == '+')
-		if (!input[1] || !ft_isdigit(input[i]))
+	if (input[i] == '-' || input[i] == '+')
+		if (!input[i + 1] || !ft_isdigit(input[i + 1]))
 			return (ERROR);
-	return (T_DIR);
+	return (T_IND);
 }

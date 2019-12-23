@@ -19,10 +19,7 @@ static int		stock_fd(t_cor *cor, char *file)
 	char	buffer[BUFF_SIZE + 1];
 
 	if ((cor->fd = open(file, O_RDONLY)) == -1)
-	{
-		//ft_printf("Read Error\n");
 		return (0);
-	}
 	while ((ret = read(cor->fd, buffer, BUFF_SIZE)) > 0)
 	{
 		buffer[ret] = '\0';
@@ -54,14 +51,9 @@ int 		asm_parser(t_cor *cor, char *file)
 	while (i < cor->size)
 	{
 		i = skip_comment(cor->file, i, &(cor->line), &pos);
-		//get_token
-		if (!(i = skip_newline(cor->file, i, &(cor->line), &pos)))
-			return (0);
-		printf("Line = %zu - Pos = %zu - i = %zu\n", cor->line,pos, i);
-		printf("File start pos = :%s:\n", cor->file + pos);
-		printf("File start i = :%s:\n", cor->file + i);
-		printf("Error token [%03zu][%03zu]\n", cor->line, i - pos);
-		exit (1);
+		if (!(i = split_input(cor, cor->file, i, cor->line)))
+			return (ERROR);
+		i = skip_newline(cor->file, i, &(cor->line), &pos);
 	}
-	return (1);
+	return (OK);
 }

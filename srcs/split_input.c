@@ -12,16 +12,13 @@
 
 #include "asm.h"
 
-static size_t	end_quotes(char *input)
+static size_t	end_quotes(char *input, size_t i)
 {
-	size_t	i;
-
-	i = 0;
 	while (input[i] && input[i] != '"')
 		i++;
 	if (!input[i])
 		return (ERROR);
-	return (i);
+	return (i + 1);
 }
 
 static t_token	*create_token(char *input, int type, size_t col, size_t line)
@@ -50,38 +47,48 @@ static void		pushback(t_cor *cor, t_token *add)
 	tmp->next = add;
 }
 
-static int		add_token(t_cor *cor, char *input, size_t col, size_t line)
+static int		add_token(t_cor *cor, char *input, size_t i, size_t line)
 {
 	int		type;
 	t_token	*new;
+	size_t col = 0;//tmp
 
-	type = tokenisation(input);
+	if (!(type = tokenisation(input)))
+		return (lexical_error(0, line));
 	if (!(new = create_token(input, type, col, line)))
 		return (MALLOC_ERROR);
+	ft_printf("|%s| = TOKEN: %d\n", new->str, new->type);
 	pushback(cor, new);
 	return (OK);
 }
 
-int				split_input(t_cor *cor, char *input, size_t col, size_t line)
+int				split_input(t_cor *cor, char *input, size_t i, size_t line)
 {
-	size_t	i;
 	char	*tmp;
+	size_t col = 0;//tmp
+	size_t	j;
 
-	i = 0;
-	if (input[0] == '"')
-		i = end_quotes(input);
+	j = i;
+	if (input[i] == '"')
+	{
+		if (!(i = end_quotes(input, i + 1)))
+					return (0);
+	}
 	else
 	{
 		while (input[i])
 		{
-			if (input[i] == ' ' || input[i] == '\t' || input[i] =='\n')
+			if (input[i] == ' ' || input[i] == '\t'
+				|| input[i] =='\n' || input[i] == SEPARATOR_CHAR)
 				break;
 			i++;
 		}
 	}
-	if (!(tmp = ft_strndup(input, i)))
+	if (i == j)
+		i += 1;
+	if (!(tmp = ft_strndup(&input[j], i - j)))
 		return (MALLOC_ERROR);
-	if (add_token(cor, tmp, col, line) == -1)
-		return (MALLOC_ERROR);
+	if (add_token(cor, tmp, j, line) <= 0)
+		return (0);//fix for malloc error
 	return (i);
 }
