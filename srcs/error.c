@@ -12,48 +12,66 @@
 
 #include "asm.h"
 
-int		invalid_param(char *instr, int type)
+char	*type_to_str(int type)
 {
-	type = 0;
-	instr = NULL;
+	if (type == T_REG)
+		return (ft_strdup("register"));
+	else if (type == T_DIR)
+		return (ft_strdup("direct"));
+	else if (type == T_IND)
+		return (ft_strdup("indirect"));
+	else if (type == T_LAB)
+		return (ft_strdup("label"));
+	else if (type == T_CMD)
+		return (ft_strdup("command_name"));
+	else if (type == T_STR)
+		return (ft_strdup("string"));
+	else if (type == T_INS)
+		return (ft_strdup("instruction"));
+	else if (type == T_SEP)
+		return (ft_strdup("separator"));
+	else
+		return (ft_strdup("endline"));
+}
 
-	ft_printf("invalid param\n");
+int		invalid_param(char *instr, int type, int param, size_t pos)
+{
+	char	*tmp;
+
+	ft_printf("Invalid parameter \n");
+	if (type == NB_ARG)
+		ft_printf("count ");
+	else
+	{
+		if (!(tmp = type_to_str(type)))
+			return (MALLOC_ERROR);
+		ft_printf("%d type %s ", pos, tmp);
+		ft_strdel(&tmp);
+	}
+	ft_printf("for instruction %s\n", instr);
 	return (ERROR);
 }
 
 int		lexical_error(size_t line, size_t col)
 {
-	line = 0;
-	col = 0;
-
-	ft_printf("lexical error\n");
+	ft_printf("Lexical error at [%d:%d]\n", line, col);
 	return (ERROR);
 }
 
-size_t	get_column(char *raw, char *to_find)
+int		syntax_error(t_token *token)
 {
-	size_t		dummy = 0;
-	raw = NULL;
-	to_find = NULL;
+	char	*tmp;
 
-	return (dummy);
-}
-
-int		syntax_error(size_t line, size_t col)
-{
-	line = 0;
-	col = 0;
-
-	ft_printf("syntax error\n");
+	if (!(tmp = type_to_str(token->type)))
+		return (MALLOC_ERROR);
+	tmp = ft_str_to_upper(tmp);
+	ft_printf("Syntax error at token [TOKEN][%03d:%03d] %s \"%s\"\n", token->line, token->col, tmp, token->str);
+	free(tmp);
 	return (ERROR);
 }
 
-int		invalid_instr(char *instr, size_t line, size_t col)
+int		invalid_instr(t_token *token)
 {
-	line = 0;
-	col = 0;
-	instr = NULL;
-
-	ft_printf("invalid instr\n");
+	ft_printf("Invalid instruction at token [TOKEN][%03d:%03d] INSTRUCTION \"%s\"\n", token->line, token->col, token->str);
 	return (ERROR);
 }

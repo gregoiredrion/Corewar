@@ -12,20 +12,6 @@
 
 #include "asm.h"
 
-/*static size_t	get_column(char *line)
-{
-	size_t	i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] == ' ' || line[i] == '\t' || ft_is_upper(line[i]))
-			return (i);
-		i++;
-	}
-	return (0);
-}*/
-
 static void		pushback(t_cor *cor, t_label *add)
 {
 	t_label		*tmp;
@@ -50,12 +36,10 @@ static t_label	*init_label(char *name, size_t pos)
 	return (new);
 }
 
-int				store_label(t_cor *cor, char *label, char *raw)
+int				store_label(t_cor *cor, char *label)
 {
 	t_label		*new;
 
-	if (upper(label) || blank(label))
-		return (lexical_error(cor->line, get_column(raw, label)));//replace label
 	if (!(new = init_label(label, cor->size)))
 		return (MALLOC_ERROR);
 	pushback(cor, new);

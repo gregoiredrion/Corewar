@@ -86,20 +86,19 @@ int		upper(char *str);
 int		blank(char *str);
 
 int		check_format_arg(t_cor *cor, char *arg, char *raw, int type);
-int		store_instr(t_cor *cor, char *instr, char *params, char *raw);
+int		store_instr(t_cor *cor, t_token *token);
 int		store_params(t_cor *cor, char *params, char *raw);
-int		store_label(t_cor *cor, char *label, char *raw);
+int		store_label(t_cor *cor, char *label);
 int		store_cmd(t_cor *cor, char *cmd, char *raw);
 int 	asm_parser(t_cor *cor, char *file);
 
 int		skip_comment(char *file, size_t i, size_t *line, size_t *pos);
 int		trim_file(char **file);
 int		skip_newline(char *file, size_t i, size_t *line, size_t *pos);
-int		invalid_param(char *instr, int type);
+int		invalid_param(char *instr, int type, int param, size_t pos);
 int		lexical_error(size_t line, size_t col);
-size_t	get_column(char *raw, char *to_find);
-int		syntax_error(size_t line, size_t col);
-int		invalid_instr(char *instr, size_t line, size_t col);
+int		syntax_error(t_token *token);
+int		invalid_instr(t_token *token);
 
 int		tokenisation(char *input);
 int		check_ind(char *input, size_t i);

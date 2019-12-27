@@ -36,7 +36,7 @@ static int	check_upper(t_cor *cor, char **args, char *raw)
 		while (args[i][j])
 		{
 			if (ft_isupper(args[i][j]))
-				return (lexical_error(cor->line, get_column(raw, args[i])));//move
+				return (ERROR);
 			j++;
 		}
 		i++;
@@ -51,21 +51,21 @@ static int	find_type(t_cor *cor, char *arg, char *raw, int type)
 		if (!check_format_arg(cor, arg, raw, REG_CODE))
 			return (ERROR);
 		if (!(type & T_REG))
-			return (invalid_param(cor->op.name, ARG_TYPE));
+			return (ERROR);
 	}
 	else if (arg[0] == DIRECT_CHAR)
 	{
 		if (!check_format_arg(cor, arg, raw, DIR_CODE))
 			return (ERROR);
 		if (!(type & T_DIR))
-			return (invalid_param(cor->op.name, ARG_TYPE));
+			return (ERROR);
 	}
 	else
 	{
 		if (!check_format_arg(cor, arg, raw, IND_CODE))
 			return (ERROR);
 		if (!(type & T_IND))
-			return (invalid_param(cor->op.name, ARG_TYPE));
+			return (ERROR);
 	}
 	return (OK);
 }
@@ -87,7 +87,7 @@ static int	check_types(t_cor *cor, char **args, char *raw)
 int			check_args(t_cor *cor, char **args, char *raw)
 {
 	if (!check_nb_args(cor->op.nb_arg, args))
-		return (invalid_param(cor->op.name, NB_ARG_ERROR));
+		return (ERROR);
 	if (check_upper(cor, args, raw))
 		return (ERROR);
 	if (!check_types(cor, args, raw))

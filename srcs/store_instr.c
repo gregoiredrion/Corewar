@@ -14,20 +14,20 @@
 
 extern t_op	op_tab[];
 
-int		store_instr(t_cor *cor, char *instr, char *params, char *raw)
+int		store_instr(t_cor *cor, t_token *token)
 {
 	size_t	i;
 
 	i = 0;
 	while (op_tab[i].name)
 	{
-		if (!ft_strcmp(instr, op_tab[i].name))
+		if (!ft_strcmp(token->str, op_tab[i].name))
 			break ;
 		i++;
 	}
 	if (!op_tab[i].name)
-		return (invalid_instr(instr, cor->line, get_column(instr, raw)));
+		return (invalid_instr(token));
 	cor->op = op_tab[i];
 	cor->program[cor->size++] = cor->op.opcode;// to do: better join
-	return (store_params(cor, params, raw));
+	return (OK);
 }

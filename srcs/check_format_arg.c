@@ -20,9 +20,9 @@ static int	check_format_reg(t_cor *cor, char *arg, char *raw)
 	while (arg[i])
 	{
 		if (arg[i] == '\t' || arg[i] == ' ')
-			return (lexical_error(cor->line, get_column(raw, arg)));
+			return (ERROR);
 		else if (!ft_isdigit(arg[i]))
-			return (syntax_error(cor->line, get_column(raw, arg)));
+			return (ERROR);
 		i++;
 	}
 	return (OK);
@@ -38,9 +38,9 @@ static int	check_format_dir(t_cor *cor, char *arg, char *raw)
 		if (arg[i] == '\t' || arg[i] == ' ')
 		{
 			if (arg[i - 1] == DIRECT_CHAR || arg[i - 1] == LABEL_CHAR)
-				return (lexical_error(cor->line, get_column(raw, arg)));
+				return (ERROR);
 			else
-				return (syntax_error(cor->line, get_column(raw, arg)));
+				return (ERROR);
 		}
 		i++;
 	}
@@ -57,9 +57,9 @@ static int	check_format_ind(t_cor *cor, char *arg, char *raw)
 		if (arg[i] == '\t' || arg[i] == ' ')
 		{
 			if (arg[i - 1] == '+' || arg[i - 1] == '-')
-				return (lexical_error(cor->line, get_column(raw, arg)));
+				return (ERROR);
 			else
-				return (syntax_error(cor->line, get_column(raw, arg)));
+				return (ERROR);
 		}
 		i++;
 	}
