@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 15:38:32 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/12/19 15:45:20 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/12/29 14:20:39 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int		invalid_param(char *instr, int type, int param, size_t pos)
 {
 	char	*tmp;
 
+param = 0; //Silence error . is param still needed 
 	ft_printf("Invalid parameter \n");
 	if (type == NB_ARG)
 		ft_printf("count ");

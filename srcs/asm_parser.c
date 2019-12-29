@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 16:19:12 by gdrion            #+#    #+#             */
-/*   Updated: 2019/12/21 10:54:32 by gregoiredrion    ###   ########.fr       */
+/*   Updated: 2019/12/29 15:56:57 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,12 @@ int 		asm_parser(t_cor *cor, char *file)
 		return (MALLOC_ERROR);
 	while (i < cor->size)
 	{
-		i = skip_comment(cor->file, i, &(cor->line), &pos);
+		i = skip_comment(cor, i, &(cor->line), &pos);
+		//printf("Line before split :%s:", cor->file + i);
 		if (!(i = split_input(cor, cor->file, i, cor->line)))
 			return (ERROR);
-		i = skip_newline(cor->file, i, &(cor->line), &pos);
+		i = skip_newline(cor, i, &(cor->line), &pos);
 	}
+	display_tokens(cor->tokens);
 	return (OK);
 }

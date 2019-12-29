@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 16:09:56 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/12/19 17:51:06 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/12/29 15:55:25 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,11 @@ static t_token	*create_token(char *input, int type, size_t col, size_t line)
 static void		pushback(t_cor *cor, t_token *add)
 {
 	t_token	*tmp;
-
 	if (!cor->tokens)
+	{
 		cor->tokens = add;
+		return ;
+	}
 	tmp = cor->tokens;
 	while (tmp->next)
 		tmp = tmp->next;
@@ -53,11 +55,11 @@ static int		add_token(t_cor *cor, char *input, size_t i, size_t line)
 	t_token	*new;
 	size_t col = 0;//tmp
 
+	i = 0; //Variable unused error
 	if (!(type = tokenisation(input)))
 		return (lexical_error(0, line));
 	if (!(new = create_token(input, type, col, line)))
 		return (MALLOC_ERROR);
-	ft_printf("|%s| = TOKEN: %d\n", new->str, new->type);
 	pushback(cor, new);
 	return (OK);
 }
@@ -65,7 +67,8 @@ static int		add_token(t_cor *cor, char *input, size_t i, size_t line)
 int				split_input(t_cor *cor, char *input, size_t i, size_t line)
 {
 	char	*tmp;
-	size_t col = 0;//tmp
+	size_t col;
+	col  = 0;//tmp Silence error since variable unused
 	size_t	j;
 
 	j = i;

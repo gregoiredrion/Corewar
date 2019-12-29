@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 15:27:46 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/12/19 17:50:23 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/12/29 14:28:48 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,16 +85,16 @@ int		empty(char *line);
 int		upper(char *str);
 int		blank(char *str);
 
-int		check_format_arg(t_cor *cor, char *arg, char *raw, int type);
+int		check_format_arg(char *arg, int type);
 int		store_instr(t_cor *cor, t_token *token);
 int		store_params(t_cor *cor, char *params, char *raw);
 int		store_label(t_cor *cor, char *label);
 int		store_cmd(t_cor *cor, char *cmd, char *raw);
 int 	asm_parser(t_cor *cor, char *file);
-
-int		skip_comment(char *file, size_t i, size_t *line, size_t *pos);
+int		skip_comment(t_cor *cor, size_t i, size_t *line, size_t *pos);
 int		trim_file(char **file);
-int		skip_newline(char *file, size_t i, size_t *line, size_t *pos);
+int		skip_newline(t_cor *cor, size_t i, size_t *line, size_t *pos);
+
 int		invalid_param(char *instr, int type, int param, size_t pos);
 int		lexical_error(size_t line, size_t col);
 int		syntax_error(t_token *token);
@@ -107,5 +107,9 @@ int		check_cmd(char *input);
 int		check_dir(char *input);
 int		check_reg_instr(char *input);
 int		split_input(t_cor *cor, char *input, size_t i, size_t line);
+
+
+//display_tokens
+void			display_tokens(t_token *tokens);
 
 #endif

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   check_format_arg.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 18:39:34 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/12/17 19:49:39 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/12/29 14:28:58 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-static int	check_format_reg(t_cor *cor, char *arg, char *raw)
+static int	check_format_reg(char *arg)
 {
 	size_t	i;
 
@@ -28,7 +28,7 @@ static int	check_format_reg(t_cor *cor, char *arg, char *raw)
 	return (OK);
 }
 
-static int	check_format_dir(t_cor *cor, char *arg, char *raw)
+static int	check_format_dir(char *arg)
 {
 	size_t	i;
 
@@ -47,7 +47,7 @@ static int	check_format_dir(t_cor *cor, char *arg, char *raw)
 	return (OK);
 }
 
-static int	check_format_ind(t_cor *cor, char *arg, char *raw)
+static int	check_format_ind(char *arg)
 {
 	size_t	i;
 
@@ -67,12 +67,12 @@ static int	check_format_ind(t_cor *cor, char *arg, char *raw)
 }
 
 //tableau de fonction?
-int		check_format_arg(t_cor *cor, char *arg, char *raw, int type)
+int		check_format_arg(char *arg, int type)
 {
 	if (type == REG_CODE)
-		return (check_format_reg(cor, arg, raw));
+		return (check_format_reg(arg));
 	else if (type == DIR_CODE)
-		return (check_format_dir(cor, arg, raw));
+		return (check_format_dir(arg));
 	else
-		return (check_format_ind(cor, arg, raw));
+		return (check_format_ind(arg));
 }

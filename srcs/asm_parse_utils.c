@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 14:21:47 by gdrion            #+#    #+#             */
-/*   Updated: 2019/12/21 10:39:49 by gregoiredrion    ###   ########.fr       */
+/*   Updated: 2019/12/29 15:09:52 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,35 @@ int			trim_file(char **file)
 	return (1);
 }
 
-int			skip_newline(char *file, size_t i, size_t *line, size_t *pos)
+int			skip_newline(t_cor *cor, size_t i, size_t *line, size_t *pos)
 {
-	size_t ret;
+	char	*file;
+	size_t	nl;
 
-	ret = 0;
+	file = cor->file;
+	nl = 0;
 	while (file[i] && (file[i] == '\t' || file[i] == ' ' || file[i] == '\n'))
 	{
 		if (file[i] == '\n')
 		{
-			ret = i;
 			(*line)++;
 			*pos = i + 1;
+			nl = i;
 		}
 		i++;
+	}
+	if (cor->tokens && nl)
+	{
+		split_input(cor, file, nl, *line);//tokenize newline
 	}
 	return (i);
 }
 
-int			skip_comment(char *file, size_t i, size_t *line, size_t *pos)
+int			skip_comment(t_cor *cor, size_t i, size_t *line, size_t *pos)
 {
+	char	*file;
+
+	file = cor->file;
 	while (file[i] &&file[i] == '#')
 	{
 		while (file[i] && file[i] != '\n')
@@ -61,8 +70,6 @@ int			skip_comment(char *file, size_t i, size_t *line, size_t *pos)
 			i++;
 		}
 	}
-	i = skip_newline(file, i, line, pos);
-	//if (!file[i])
-		//return (0);
+	i = skip_newline(cor, i, line, pos);
 	return (i);
 }

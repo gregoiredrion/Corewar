@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenisation.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 16:40:31 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/12/19 17:06:39 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/12/29 15:41:54 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int		tokenisation(char *input)
 {
 	if (input[0] == '"')
 		return (T_STR);// lexical error possible?
+	else if (input[0] == '\n')
+		return (T_NEW);
 	else if (input[0] == SEPARATOR_CHAR)
 		return (T_SEP);
 	else if (upper(input))

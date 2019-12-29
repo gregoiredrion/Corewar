@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/29 13:42:31 by gdrion            #+#    #+#             */
-/*   Updated: 2019/12/29 14:16:14 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/12/29 15:44:16 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,5 @@ void			display_tokens(t_token *tokens)
 			ft_printf("[%s] ", id_token(tokens));
 		tokens = tokens->next;
 	}
+	printf("\n");
 }
