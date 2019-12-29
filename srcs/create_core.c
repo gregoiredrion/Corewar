@@ -22,5 +22,6 @@ int			create_cor(t_cor *cor)
 	cor->carry = 0;
 	cor->size = 0;
 	cor->line = 1;
+	cor->tokens = NULL;
 	return (OK);
 }
