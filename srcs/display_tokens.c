@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/29 13:42:31 by gdrion            #+#    #+#             */
-/*   Updated: 2019/12/29 15:44:16 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/12/29 16:15:43 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void			display_tokens(t_token *tokens)
 		if (tokens->type == T_NEW)
 			printf("\n");
 		else
-			ft_printf("[%s] ", id_token(tokens));
+			ft_printf("[%s] = %s ", id_token(tokens), tokens->str);
 		tokens = tokens->next;
 	}
 	printf("\n");
