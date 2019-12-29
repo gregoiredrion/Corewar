@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 15:59:44 by gdrion            #+#    #+#             */
-/*   Updated: 2019/12/19 16:03:54 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/12/29 18:33:46 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef char		t_arg_type;
 #define T_INS					64
 #define T_SEP					128
 #define	T_NEW					256
+#define T_EOF					512
 
 /*
 **

@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/29 13:42:31 by gdrion            #+#    #+#             */
-/*   Updated: 2019/12/29 16:15:43 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/12/29 19:27:48 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static char		*id_token(t_token *token)
 		return ("INSTRUCTION");
 	else if (token->type == T_SEP)
 		return ("SEPARATOR");
+	else if (token->type == T_EOF)
+		return ("End of file");
 	return ("Error Boiiii");
 }
 void			display_tokens(t_token *tokens)
