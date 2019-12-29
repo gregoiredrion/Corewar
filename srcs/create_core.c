@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 14:00:41 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/12/23 12:17:19 by gregoiredrion    ###   ########.fr       */
+/*   Updated: 2019/12/29 17:09:03 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,16 @@
 
 int			create_cor(t_cor *cor)
 {
+	cor->name = NULL;
 	cor->fd = -1;
 	cor->flag = 0;
 	cor->file = NULL;
-	cor->name = NULL;
-	cor->comment = NULL;
-	cor->carry = 0;
 	cor->size = 0;
 	cor->line = 1;
+	cor->prog = NULL;
+	cor->labels = NULL;
+	cor->offset = NULL;
 	cor->tokens = NULL;
+	cor->header = NULL;
 	return (OK);
 }

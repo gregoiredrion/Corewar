@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_params.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 16:40:31 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/12/19 15:32:46 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2019/12/29 17:47:49 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void		set_type_params(t_op op, char **params, t_arg_type types[])
 }
 
 //to do put arg instead of params
-int					store_params(t_cor *cor, char *args, char *raw)
+int					store_params(t_cor *cor, char *args)
 {
 	char		**split;
 	t_arg_type	types[3];
@@ -68,10 +68,9 @@ int					store_params(t_cor *cor, char *args, char *raw)
 		i++;
 	}
 //	if (!check_args(cor, split, raw))
-//		return (ERROR);
-	raw = NULL; //
+//		return (ERROR); //
 	set_type_params(cor->op, split, types);
 	if (cor->op.nb_arg != 1)//uniquement ceux a 2+ ou ceux plusieurs poss?
-		cor->program[cor->size++] = total_arg(cor->op.nb_arg, types);
+		cor->prog[cor->size++] = total_arg(cor->op.nb_arg, types);
 	return (OK);
 }
