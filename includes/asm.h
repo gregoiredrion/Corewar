@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 15:27:46 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/06 17:33:48 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/06 19:44:48 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int		store_params(t_cor *cor, char *params);
 int		store_label(t_cor *cor, char *label);
 int		store_cmd(t_cor *cor, char *cmd, char *raw);
 int		store_header(t_cor *cor, t_token *token);
+char	*create_cor_file(t_cor *cor);
 int 	asm_parser(t_cor *cor, char *file);
 int		skip_comment(t_cor *cor, size_t i, size_t *line, size_t *pos);
 int		trim_file(char **file);
