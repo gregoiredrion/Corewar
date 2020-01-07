@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 15:27:46 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/06 19:44:48 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/07 16:34:16 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@ typedef struct	s_offset
 {
 	char			*name;
 	size_t			start;
+	size_t			pos;
 	size_t			byte;
-	struct s_offest	*next;
+	struct s_offset	*next;
 }				t_offset;
 
 typedef struct	s_label
@@ -108,6 +109,8 @@ int		check_cmd(char *input);
 int		check_dir(char *input);
 int		check_reg_instr(char *input);
 int		split_input(t_cor *cor, char *input, size_t i, size_t line);
+int		offsets(t_cor *cor);
+t_label	*find_label(t_offset *offset, t_label *label);
 
 
 //display_tokens
