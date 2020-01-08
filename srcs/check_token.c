@@ -25,8 +25,10 @@ int		check_dir(char *input)
 
 int		check_cmd(char *input)
 {
-	if (!ft_strcmp(input, ".name") || !ft_strcmp(input, ".comment"))
-		return (T_CMD);
+	if (!ft_strcmp(input, ".name")
+		return (T_NAM);
+	else if (!ft_strcmp(input, ".comment"))
+		return (T_CMT);
 	return (ERROR);
 }
 
