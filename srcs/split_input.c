@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 16:09:56 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/12/29 15:55:25 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/08 15:05:21 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int				split_input(t_cor *cor, char *input, size_t i, size_t line)
 		while (input[i])
 		{
 			if (input[i] == ' ' || input[i] == '\t'
-				|| input[i] =='\n' || input[i] == SEPARATOR_CHAR)
+				|| input[i] =='\n' || input[i] == SEPARATOR_CHAR || input[i] == '"')
 				break;
 			i++;
 		}
