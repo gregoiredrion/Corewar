@@ -20,6 +20,8 @@ int		check_dir(char *input)
 	if (input[1] == '-' || input[1] == '+')
 		if (!check_ind(input, 1))
 			return (ERROR);
+	if (input[1] == LABEL_CHAR)
+		return (T_DIR | T_LAB);
 	return (T_DIR);
 }
 
@@ -75,5 +77,7 @@ int		check_ind(char *input, size_t i)
 	if (input[i] == '-' || input[i] == '+')
 		if (!input[i + 1] || !ft_isdigit(input[i + 1]))
 			return (ERROR);
+	if (input[0] == LABEL_CHAR)
+		return (T_IND | T_LAB);
 	return (T_IND);
 }
