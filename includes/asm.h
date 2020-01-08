@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 15:27:46 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/08 11:03:44 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/08 13:10:15 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int		upper(char *str);
 int		blank(char *str);
 
 int		check_format_arg(char *arg, int type);
-int		store_instr(t_cor *cor, t_token *token);
+t_op	store_instr(t_token *token);
 int		store_params(t_cor *cor, char *params);
 int		store_label(t_cor *cor, char *label);
 int		store_cmd(t_cor *cor, char *cmd, char *raw);

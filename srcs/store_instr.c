@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 16:10:59 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/12/30 14:25:18 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/08 13:13:25 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ t_op	store_instr(t_token *token)
 			break ;
 		i++;
 	}
-	if (!op_tab[i].name)
-		return (NULL/*invalid_instr(token)*/);
 	op = op_tab[i];
 	//cor->prog[cor->size++] = cor->op.opcode;// to do: better join
-	return (OK);
+	return (op);
 }

@@ -6,23 +6,13 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/29 18:54:24 by gdrion            #+#    #+#             */
-/*   Updated: 2019/12/30 17:52:48 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/08 13:15:00 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
 extern t_op	op_tab[];
-
-t_token		*label_params(t_token *token)
-{
-	if (token->next && token->next->type & T_NEW)
-		token = token->next;
-	if (token->next && (token->next->type & T_INSTR))
-		return (token->next);
-	else
-		return (NULL);
-}
 
 t_token		*instr_params(t_token *token)
 {
@@ -31,38 +21,34 @@ t_token		*instr_params(t_token *token)
 	t_token	prev;
 	int		sep;
 
-	sep = T_NEW | T_EOF | T_SEP;
+	sep = T_SEP;
 	i = 0;
-	prev.type = T_SEP;
-	if (!(op = store_instr(token)))
+	prev.type = sep;
+	op = store_instr(token);
+	if (op.name == NULL)
 		return (NULL);
-	while (i < op.nb_arg && token->next)
+	while (i < op.nb_arg && token)
 	{
-		if (prev.type & sep && token->next->type & op.arg_type[i])
+		if (prev.type & sep && token->type & op.arg_type[i])
 		{
-			prev.type = arg_type[i];
+			prev.type = op.arg_type[i];
 			i++;
 		}
-		else if (!(prev.type & T_NEW) && token->next->type & sep)
-		{
-			if (i < op.nb_arg && token->next->type & (T_NEW | T_SEP))
-				return (NULL);
-			prev.type = sep;
-		}
+		else if (prev.type & op.arg_type[i] && token->type & sep)
+			prev.type = token->type;
 		else
 			return (NULL);
 		token = token->next;
 	}
-
+	return (token);
 }
 
-// Function tab or if forest ?
 t_token		*check_params(t_token *token)
 {
-	if (token->type == T_LAB)
-		if (!(label_params(token)))
-			return (ERROR);
-	if (token->type == T_INSTR)
-		if (!(instr_params(token))
-
+	if (token->type & T_NEW)
+		token = token->next;
+	if (token->type == T_INS)
+		return (instr_params(token));
+	else
+		return (NULL);
 }
