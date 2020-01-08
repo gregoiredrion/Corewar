@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 15:27:46 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/12/29 17:48:06 by gdrion           ###   ########.fr       */
+/*   Updated: 2019/12/29 19:17:43 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,8 @@ int		check_cmd(char *input);
 int		check_dir(char *input);
 int		check_reg_instr(char *input);
 int		split_input(t_cor *cor, char *input, size_t i, size_t line);
-
-
+int		token_validity(t_cor *cor);
+t_token		*check_params(t_token *token);
 //display_tokens
 void			display_tokens(t_token *tokens);
 
