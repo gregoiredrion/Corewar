@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 15:59:44 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/06 15:27:30 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/08 15:02:15 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,14 @@ typedef char		t_arg_type;
 #define T_DIR					2
 #define T_IND					4
 #define T_LAB					8
-#define T_CMD					16
-#define T_STR					32
-#define T_INS					64
-#define T_SEP					128
-#define	T_NEW					256
-#define T_EOF					512
+#define T_CMT					16
+#define T_NAME					32
+#define T_STR					64
+#define T_INS					128
+#define T_SEP					256
+#define	T_NEW					512
+#define T_EOF					1024
+
 
 /*
 **
