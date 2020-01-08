@@ -25,7 +25,7 @@ int		check_dir(char *input)
 
 int		check_cmd(char *input)
 {
-	if (!ft_strcmp(input, ".name")
+	if (!ft_strcmp(input, ".name"))
 		return (T_NAM);
 	else if (!ft_strcmp(input, ".comment"))
 		return (T_CMT);
@@ -35,14 +35,20 @@ int		check_cmd(char *input)
 int		check_label(char *input)
 {
 	size_t	i;
+	size_t	lab_char;
 
 	i = 0;
+	lab_char = 0;
 	while (input[i])
 	{
 		if (!ft_strchr(LABEL_CHARS, input[i]) && input[i] != LABEL_CHAR)
 			return (ERROR);
+		if (input[i] == LABEL_CHAR)
+		lab_char++;
 		i++;
 	}
+	if (lab_char != 1 || input[i - 1] != LABEL_CHAR)
+		return (ERROR);
 	return (T_LAB);
 }
 
