@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 15:38:32 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/12/29 14:20:39 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/08 16:26:35 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*type_to_str(int type)
 		return (ft_strdup("indirect"));
 	else if (type == T_LAB)
 		return (ft_strdup("label"));
-	else if (type == T_CMD)
+	else if (type & (T_CMT | T_NAM))
 		return (ft_strdup("command_name"));
 	else if (type == T_STR)
 		return (ft_strdup("string"));
@@ -38,7 +38,7 @@ int		invalid_param(char *instr, int type, int param, size_t pos)
 {
 	char	*tmp;
 
-param = 0; //Silence error . is param still needed 
+param = 0; //Silence error . is param still needed
 	ft_printf("Invalid parameter \n");
 	if (type == NB_ARG)
 		ft_printf("count ");
@@ -67,7 +67,7 @@ int		syntax_error(t_token *token)
 		return (MALLOC_ERROR);
 	tmp = ft_str_to_upper(tmp);
 	ft_printf("Syntax error at token [TOKEN][%03d:%03d] %s \"%s\"\n", token->line, token->col, tmp, token->str);
-	free(tmp);
+	ft_strdel(&tmp);
 	return (ERROR);
 }
 

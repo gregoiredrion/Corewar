@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/29 13:42:31 by gdrion            #+#    #+#             */
-/*   Updated: 2019/12/29 19:27:48 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/08 16:25:15 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char		*id_token(t_token *token)
 		return ("INDIRECT");
 	else if (token->type == T_LAB)
 		return ("LABEL");
-	else if (token->type == T_CMD)
+	else if (token->type & (T_NAM | T_CMT))
 		return ("COMMAND");
 	else if (token->type == T_STR)
 		return ("STRING");

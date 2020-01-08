@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/29 18:54:24 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/08 13:15:00 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/08 16:24:37 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,24 @@
 
 extern t_op	op_tab[];
 
-t_token		*instr_params(t_token *token)
+t_token		*cmd_params(t_cor* cor, t_token *token)
+{
+	if (!token->next)
+		return (NULL);
+	if (token->type & T_NAM && token->next->type & T_STR)
+		return (store_name(cor, token->next));
+	if (token->type & T_CMT && token->next->type & T_STR)
+		return (store_name(cor, token->next));
+	return (NULL);
+}
+
+t_token		*instr_params(t_cor *cor, t_token *token)
 {
 	size_t	i;
 	t_op	op;
 	t_token	prev;
 	int		sep;
-
+cor = NULL; // Silence flags
 	sep = T_SEP;
 	i = 0;
 	prev.type = sep;
@@ -43,12 +54,11 @@ t_token		*instr_params(t_token *token)
 	return (token);
 }
 
-t_token		*check_params(t_token *token)
+t_token		*check_params(t_cor *cor, t_token *token)
 {
-	if (token->type & T_NEW)
-		token = token->next;
 	if (token->type == T_INS)
-		return (instr_params(token));
-	else
-		return (NULL);
+		return (instr_params(cor, token));
+	if (token->type & (T_NAM | T_CMT))
+		return (cmd_params(cor, token));
+	return (NULL);
 }
