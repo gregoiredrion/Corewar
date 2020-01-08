@@ -6,11 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 15:27:46 by wdeltenr          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2019/12/29 19:17:43 by gdrion           ###   ########.fr       */
-=======
-/*   Updated: 2020/01/07 16:34:16 by wdeltenr         ###   ########.fr       */
->>>>>>> d05280323a7d41a3d5ed8f8134dff7cd52e69344
+/*   Updated: 2020/01/08 11:03:44 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,15 +109,12 @@ int		check_cmd(char *input);
 int		check_dir(char *input);
 int		check_reg_instr(char *input);
 int		split_input(t_cor *cor, char *input, size_t i, size_t line);
-<<<<<<< HEAD
 int		token_validity(t_cor *cor);
 t_token		*check_params(t_token *token);
-=======
 int		offsets(t_cor *cor);
 t_label	*find_label(t_offset *offset, t_label *label);
 
 
->>>>>>> d05280323a7d41a3d5ed8f8134dff7cd52e69344
 //display_tokens
 void			display_tokens(t_token *tokens);
 
