@@ -6,7 +6,7 @@
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 14:08:17 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/12/16 15:33:26 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/07 15:36:20 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,12 @@ char			*ft_itoa(intmax_t n);
 char			*ft_dtoa(long double n, int prec);
 char			*ft_uitoa(uintmax_t n);
 char			*ft_lltoa_tumsoules(long long int n);
+
+/*
+**	Bytes
+*/
+int				reverse_int32(int c);
+short			reverse_int16(short c);
 
 /*
 **Trouver une valeur

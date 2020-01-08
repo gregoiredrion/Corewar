@@ -6,7 +6,11 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 15:27:46 by wdeltenr          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2019/12/29 19:17:43 by gdrion           ###   ########.fr       */
+=======
+/*   Updated: 2020/01/07 16:34:16 by wdeltenr         ###   ########.fr       */
+>>>>>>> d05280323a7d41a3d5ed8f8134dff7cd52e69344
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +40,9 @@ typedef struct	s_offset
 {
 	char			*name;
 	size_t			start;
+	size_t			pos;
 	size_t			byte;
-	struct s_offest	*next;
+	struct s_offset	*next;
 }				t_offset;
 
 typedef struct	s_label
@@ -72,7 +77,7 @@ typedef struct	s_cor
 	t_offset		*offset;
 	t_op			op;
 	t_token			*tokens;
-	header_t		*header;
+	header_t		header;
 }				t_cor;
 
 int		usage(void);
@@ -89,6 +94,8 @@ int		store_instr(t_cor *cor, t_token *token);
 int		store_params(t_cor *cor, char *params);
 int		store_label(t_cor *cor, char *label);
 int		store_cmd(t_cor *cor, char *cmd, char *raw);
+int		store_header(t_cor *cor, t_token *token);
+char	*create_cor_file(t_cor *cor);
 int 	asm_parser(t_cor *cor, char *file);
 int		skip_comment(t_cor *cor, size_t i, size_t *line, size_t *pos);
 int		trim_file(char **file);
@@ -106,8 +113,15 @@ int		check_cmd(char *input);
 int		check_dir(char *input);
 int		check_reg_instr(char *input);
 int		split_input(t_cor *cor, char *input, size_t i, size_t line);
+<<<<<<< HEAD
 int		token_validity(t_cor *cor);
 t_token		*check_params(t_token *token);
+=======
+int		offsets(t_cor *cor);
+t_label	*find_label(t_offset *offset, t_label *label);
+
+
+>>>>>>> d05280323a7d41a3d5ed8f8134dff7cd52e69344
 //display_tokens
 void			display_tokens(t_token *tokens);
 

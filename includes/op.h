@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 15:59:44 by gdrion            #+#    #+#             */
-/*   Updated: 2019/12/29 18:33:46 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/06 15:27:30 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,9 @@ typedef char		t_arg_type;
 typedef struct		header_s
 {
   unsigned int		magic;
-  char				prog_name[PROG_NAME_LENGTH + 1];
+  char				prog_name[PROG_NAME_LENGTH + 4];
   unsigned int		prog_size;
-  char				comment[COMMENT_LENGTH + 1];
+  char				comment[COMMENT_LENGTH + 4];
 }					header_t;
 
 #endif
