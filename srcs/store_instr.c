@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 16:10:59 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/08 15:58:34 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/09 16:22:12 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ t_op	store_instr(t_token *token)
 		i++;
 	}
 	op = op_tab[i];
+	//cor->prog[size++] = op.opcode;
 	return (op);
 }

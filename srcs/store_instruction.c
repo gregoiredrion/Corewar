@@ -6,13 +6,13 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 17:45:35 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/08 21:01:44 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/09 16:28:02 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-static char			total_arg(arg_type arg_type[], size_t nb_arg)
+static char			total_arg(t_arg_type arg_type[], size_t nb_arg)
 {
 	char	tot;
 	size_t	i;
@@ -29,14 +29,17 @@ static char			total_arg(arg_type arg_type[], size_t nb_arg)
 	return (tot);
 }
 
-static int	check_possibilities(arg_type arg_type[], size_t nb_arg)
+static int	check_possibilities(t_arg_type arg_type[], size_t nb_arg)
 {
 	size_t	i;
 
 	i = 0;
-	while (arg_type[i])
+	while (i < nb_arg)
+	{
 		if (arg_type[i] & (arg_type[i] - 1))
 			return (true);
+			i++;
+	}
 	return (false);
 }
 
@@ -55,12 +58,12 @@ static void		write_param(t_cor *cor, t_token *param, size_t nb_bytes)
 			output = (short)ft_atoi(param->str + 1);
 		else
 			output = (short)ft_atoi(param->str);
-		cor->prog[cor->size] = reverse_bits16((short)output);
+		cor->prog[cor->size] = reverse_int16((short)output);
 	}
 	else
 	{
 		output = ft_atoi(param->str + 1);
-		cor->prog[cor->size] = reverse_bits32(output);
+		cor->prog[cor->size] = reverse_int32(output);
 	}
 }
 
@@ -75,10 +78,10 @@ static t_token	*store_params(t_cor *cor, t_token *param)
 		if (param->type & T_REG)
 			nb_bytes = 1;
 		if (param->type & T_DIR)
-			cor->op.label_size == 1 ? (nb_bytes = 2 : nb_bytes = 4);
+			nb_bytes = (cor->op.label_size == 1) ? 2 : 4;
 		if (param->type & T_IND)
 			nb_bytes = 2;
-		write_param(cor, token, nb_bytes);
+		write_param(cor, param, nb_bytes);
 	}
 	return (param);
 }
@@ -88,5 +91,5 @@ t_token		*store_instruction(t_cor *cor, t_token *token)
 
 	if (check_possibilities(cor->op.arg_type, cor->op.nb_arg))
 		cor->prog[cor->size++] = total_arg(cor->op.arg_type, cor->op.nb_arg);
-	store_params(cor, token->next);
+	return (store_params(cor, token->next));
 }

@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 15:27:46 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/08 16:22:21 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/09 16:30:33 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ typedef struct	s_cor
 	char			*file;
 	size_t			size;
 	size_t			line;
+	size_t			pos;
+	size_t			max;
 	char			*prog;
 	t_label			*labels;
 	t_offset		*offset;
@@ -87,7 +89,7 @@ int		blank(char *str);
 
 int		check_format_arg(char *arg, int type);
 t_op	store_instr(t_token *token);
-int		store_params(t_cor *cor, char *params);
+//int		store_params(t_cor *cor, char *params);
 int		store_label(t_cor *cor, char *label);
 int		store_cmd(t_cor *cor, char *cmd, char *raw);
 int		store_header(t_cor *cor, t_token *token);
@@ -111,11 +113,11 @@ int		check_reg_instr(char *input);
 int		split_input(t_cor *cor, char *input, size_t i, size_t line);
 int		token_validity(t_cor *cor);
 t_token	*check_params(t_cor *cor, t_token *token);
-int		offsets(t_cor *cor);
-t_label	*find_label(t_offset *offset, t_label *label);
+int		offsets(t_cor *cor, t_token *token, size_t nb_bytes);
+t_label	*find_label(char *offset, t_label *label);
 t_token	*store_comment(t_cor *cor, t_token *token);
 t_token	*store_name(t_cor *cor, t_token *token);
-
+void		write_prog(t_cor *cor, int add, size_t nb_bytes);
 
 //display_tokens
 void			display_tokens(t_token *tokens);

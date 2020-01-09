@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/29 18:54:24 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/08 18:07:12 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/09 16:20:40 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ cor = NULL; // Silence flags
 		else if (prev.type & op.arg_type[i] && token->type & sep)
 		{
 				prev.type = token->type;
-				arg_type[i] = token->type;
+				op.arg_type[i] = token->type;//does it change the op.c?
 		}
 		else
 			return (NULL);
