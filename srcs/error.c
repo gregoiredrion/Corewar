@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 15:38:32 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/09 17:00:32 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/09 18:32:56 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ char	*type_to_str(int type)
 		return (ft_strdup("instruction"));
 	else if (type == T_SEP)
 		return (ft_strdup("separator"));
-	else
+	else if (type == T_NEW)
 		return (ft_strdup("endline"));
+	return (ft_strdup("WAAAAAAAAAAAAAAA"));
 }
 
 int		invalid_param(char *instr, int type, int param, size_t pos)
