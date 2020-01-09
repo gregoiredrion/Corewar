@@ -6,14 +6,14 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 15:38:32 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/08 16:26:35 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/09 17:00:32 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
 char	*type_to_str(int type)
-{
+{//add indirect & direct label
 	if (type == T_REG)
 		return (ft_strdup("register"));
 	else if (type == T_DIR)
@@ -59,16 +59,16 @@ int		lexical_error(size_t line, size_t col)
 	return (ERROR);
 }
 
-int		syntax_error(t_token *token)
+t_token		*syntax_error(t_token *token)
 {
 	char	*tmp;
 
 	if (!(tmp = type_to_str(token->type)))
-		return (MALLOC_ERROR);
+		return (NULL);
 	tmp = ft_str_to_upper(tmp);
 	ft_printf("Syntax error at token [TOKEN][%03d:%03d] %s \"%s\"\n", token->line, token->col, tmp, token->str);
 	ft_strdel(&tmp);
-	return (ERROR);
+	return (NULL);
 }
 
 int		invalid_instr(t_token *token)
