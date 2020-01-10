@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 15:27:46 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/10 14:24:15 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/10 17:04:00 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,10 @@ int		store_cmd(t_cor *cor, char *cmd, char *raw);
 int		store_header(t_cor *cor, t_token *token);
 char	*create_cor_file(t_cor *cor);
 int 	asm_parser(t_cor *cor, char *file);
-int		skip_comment(t_cor *cor, size_t i, size_t *line, size_t *pos);
 int		trim_file(char **file);
-int		skip_newline(t_cor *cor, size_t i, size_t *line, size_t *pos);
+int		skip_nl(t_cor *cor, char *input, size_t *line, size_t *col);
+t_token	*create_token(char *input, int type, size_t col, size_t line);
+void	pushback_token(t_cor *cor, t_token *token);
 
 int		invalid_param(char *instr, int type, int param, size_t pos);
 int		lexical_error(size_t line, size_t col);

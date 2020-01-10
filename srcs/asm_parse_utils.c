@@ -6,69 +6,59 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 14:21:47 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/10 14:58:11 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/10 17:04:52 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int			trim_file(char **file)
+static int		ft_isblank(char c)
 {
-	char	*new;
-	if (!(new = ft_strtrim(*file)))
-		return (MALLOC_ERROR);
-	*file = new;
-	return (1);
+	return (c == ' ' || c == '\n' || c == '\t');
 }
 
-int			skip_newline(t_cor *cor, size_t i, size_t *line, size_t *pos)
+static size_t	skip_comment(char *input)
 {
-	char	*file;
-	size_t	nl;
+	size_t	i;
 
-	file = cor->file;
-	nl = 0;
-	while (file[i] && (file[i] == '\t' || file[i] == ' ' || file[i] == '\n'))
-	{
-		if (file[i] == '\n')
-		{
-			(*line)++;
-			*pos = i + 1;
-			nl = i;
-			break;
-		}
+	i = 0;
+	while (input[i] != '\n' && input[i])
 		i++;
-	}
-	//if (cor->tokens && nl)
-		//split_input(cor, file, nl, *line);//tokenize newline
 	return (i);
 }
 
-int			skip_comment(t_cor *cor, size_t i, size_t *line, size_t *pos)
+static int		add_newline_token(t_cor *cor, size_t col, size_t line)
 {
-	char	*file;
+	t_token	*token;
 
-	file = cor->file;
-	while (file[i] &&file[i] == '#')
+	if (!(token = create_token("\n", T_NEW, col, line)))
+		return (MALLOC_ERROR);
+	pushback_token(cor, token);
+	return (OK);
+}
+
+int				skip_nl(t_cor *cor, char *input, size_t *line, size_t *col)
+{
+	size_t	i;
+	size_t	add;
+
+	add = 0;
+	i = 0;
+	while (ft_isblank(input[i]))
 	{
-		while (file[i] && file[i] != '\n')
-			i++;
-		if (file[i] == '\n')
+		if (input[i] == '\n')
 		{
-			i++;
+			if (!add)
+				if (add_newline_token(cor, *col, *line) == -1)
+					return (MALLOC_ERROR);
+			add++;
+			*col = 1;
 			(*line)++;
-			*pos = i;
 		}
-		while (file[i] && (file[i] == '\t' || file[i] == ' ' || file[i] == '\n'))
-		{
-			if (file[i] == '\n')
-			{
-				(*line)++;
-				*pos = i + 1;
-			}
-			i++;
-		}
+		else if (input[i] == '#')
+			i += skip_comment(input + i);
+		i++;
+		*col = *col + 1;
 	}
-	i = skip_newline(cor, i, line, pos);
 	return (i);
 }

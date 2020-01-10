@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 16:02:31 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/10 15:21:19 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/10 17:02:37 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,34 +20,6 @@ static void		get_cmd_type(int *type, char *str)
 		*type = *type ^ T_NAM;
 	else
 		*type = 0;
-}
-
-static t_token	*create_token(char *input, int type, size_t col, size_t line)
-{
-	t_token	*new;
-
-	if (!(new = malloc(sizeof(t_token))))
-		return (NULL);
-	new->str = input;
-	new->col = col;
-	new->line = line;
-	new->type = type;
-	new->next = NULL;
-	return (new);
-}
-
-static void		pushback(t_cor *cor, t_token *add)
-{
-	t_token	*tmp;
-	if (!cor->tokens)
-	{
-		cor->tokens = add;
-		return ;
-	}
-	tmp = cor->tokens;
-	while (tmp->next)
-		tmp = tmp->next;
-	tmp->next = add;
 }
 
 char	*change_settings(char *input, size_t *i, size_t *n)
@@ -66,7 +38,6 @@ int		tokenization(t_cor *cor, char *input, size_t col, size_t line)
 	size_t	i;
 
 	n = 0;
-	//ft_printf("===\n%s\n==\n", input);
 	type = get_type(input, &n);
 	i = n;
 	if (type == T_STR)
@@ -76,8 +47,9 @@ int		tokenization(t_cor *cor, char *input, size_t col, size_t line)
 		get_cmd_type(&type, token_string);
 	if (type == 0)
 		return (lexical_error(line, col));// Do lexical Error function ! Avant ???
-	token = create_token(token_string, type, col, line);
-	pushback(cor, token);
+	if (!(token = create_token(token_string, type, col, line)))
+		return (MALLOC_ERROR);
+	pushback_token(cor, token);
 	//display_tokens(token);
 	return (i);
 }
