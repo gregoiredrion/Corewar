@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 15:27:46 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/09 22:37:16 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/10 14:24:15 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct	s_offset
 	char			*name;
 	size_t			start;
 	size_t			pos;
-	size_t			byte;
+	size_t			nb_bytes;
 	struct s_offset	*next;
 }				t_offset;
 
@@ -114,7 +114,6 @@ int		split_input(t_cor *cor, char *input, size_t i, size_t line);
 int		token_validity(t_cor *cor);
 t_token	*check_params(t_cor *cor, t_token *token);
 int		offsets(t_cor *cor, t_token *token, size_t nb_bytes);
-t_label	*find_label(char *offset, t_label *label);
 t_token	*store_comment(t_cor *cor, t_token *token);
 t_token	*store_name(t_cor *cor, t_token *token);
 void	write_prog(t_cor *cor, int add, size_t nb_bytes);
