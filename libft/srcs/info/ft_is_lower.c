@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   ft_is_lower.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
+/*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/21 13:39:39 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/09 14:36:41 by gdrion           ###   ########.fr       */
+/*   Created: 2020/01/09 14:37:05 by gdrion            #+#    #+#             */
+/*   Updated: 2020/01/09 14:37:14 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int			ft_isalpha(int c)
+int	ft_islower(int c)
 {
-	if (ft_islower(c) == 1 || ft_isupper(c) == 1)
+	if (c >= 97 && c <= 122)
 		return (1);
 	return (0);
 }

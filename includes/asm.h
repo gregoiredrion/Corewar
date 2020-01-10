@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 15:27:46 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/09 16:58:10 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/09 22:37:16 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,12 @@ int		offsets(t_cor *cor, t_token *token, size_t nb_bytes);
 t_label	*find_label(char *offset, t_label *label);
 t_token	*store_comment(t_cor *cor, t_token *token);
 t_token	*store_name(t_cor *cor, t_token *token);
-void		write_prog(t_cor *cor, int add, size_t nb_bytes);
+void	write_prog(t_cor *cor, int add, size_t nb_bytes);
+int		get_instr(char *input, size_t *n);
+int		get_reg(char *input, size_t *n);
+int		get_indir(char *input, size_t *n);
+int		get_type(char *input, size_t *n);
+int		tokenization(t_cor *cor, char *input, size_t col, size_t line);
 
 //display_tokens
 void			display_tokens(t_token *tokens);

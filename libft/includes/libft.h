@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 14:08:17 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/07 15:36:20 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/09 14:37:41 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ size_t			ft_strlen(const char *str);
 int				ft_wstrlen(const wchar_t *wstr);
 int				ft_isalpha(int c);
 int				ft_isupper(int c);
+int				ft_islower(int c);
 int				ft_isdigit(int c);
 int				ft_isalnum(int c);
 int				ft_isascii(int c);
@@ -115,6 +116,7 @@ int				ft_count_digit(int n);
 int				get_next_line(const int fd, char **line);
 void			*ft_memchr(const void *s, int c, size_t n);
 int				ft_sign(long long int n);
+int				is_blank(char c);
 
 /*
 **free
