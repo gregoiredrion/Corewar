@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 16:02:31 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/10 17:02:37 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/10 17:19:50 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*change_settings(char *input, size_t *i, size_t *n)
 	return (input + 1);
 }
 
-int		tokenization(t_cor *cor, char *input, size_t col, size_t line)
+int		tokenization(t_cor *cor, char *input, size_t *col, size_t line)
 {
 	char	*token_string;
 	t_token	*token;
@@ -46,10 +46,11 @@ int		tokenization(t_cor *cor, char *input, size_t col, size_t line)
 	if (type & (T_NAM | T_CMT))
 		get_cmd_type(&type, token_string);
 	if (type == 0)
-		return (lexical_error(line, col));// Do lexical Error function ! Avant ???
-	if (!(token = create_token(token_string, type, col, line)))
+		return (lexical_error(line, *col));// Do lexical Error function ! Avant ???
+	if (!(token = create_token(token_string, type, *col, line)))
 		return (MALLOC_ERROR);
 	pushback_token(cor, token);
 	//display_tokens(token);
+	*col += i;
 	return (i);
 }

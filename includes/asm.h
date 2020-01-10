@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 15:27:46 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/10 17:04:00 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/10 17:18:50 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ int		get_instr(char *input, size_t *n);
 int		get_reg(char *input, size_t *n);
 int		get_indir(char *input, size_t *n);
 int		get_type(char *input, size_t *n);
-int		tokenization(t_cor *cor, char *input, size_t col, size_t line);
+int		tokenization(t_cor *cor, char *input, size_t *col, size_t line);
 
 //display_tokens
 void			display_tokens(t_token *tokens);
