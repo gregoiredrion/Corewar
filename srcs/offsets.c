@@ -6,13 +6,13 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:30:56 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/09 16:17:50 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/10 14:24:39 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-t_label		*find_label(char *offset, t_label *label)
+static t_label	*find_label(char *offset, t_label *label)
 {
 	size_t	i;
 
@@ -28,7 +28,15 @@ t_label		*find_label(char *offset, t_label *label)
 	return (NULL);
 }
 
-int			last_offsets(t_cor *cor)
+static void		process_offset(t_cor *cor, t_label *label, t_offset *offset)
+{
+  if (offset->nb_bytes == 2)
+    cor->prog[offset->pos] = (short)(reverse_int16(label->pos - offset->start));
+  else if (offset->nb_bytes == 4)
+    cor->prog[offset->pos] = reverse_int32(label->pos - offset->start);
+}
+
+int				last_offsets(t_cor *cor)
 {
 	t_offset	*offset;
 	t_label		*label;
@@ -38,16 +46,17 @@ int			last_offsets(t_cor *cor)
 	{
 		if (!(label = find_label(offset->name, cor->labels)))
 		{
-			ft_printf("No such label lie while attempting to dereference token [TOKEN][007:007] DIRECT_LABEL \"%s\"", offset->name);
+			ft_printf("No such label lie while attempting to dereference token "
+			"[TOKEN][007:007] DIRECT_LABEL \"%s\"", offset->name);
 			return (ERROR);
 		}
-		//process_offset(cor, label, offset);
+		process_offset(cor, label, offset);
 		offset = offset->next;
 	}
 	return (OK);
 }
 
-static int	store_offset(t_cor *cor, t_token *token, size_t nb_bytes)
+static int		store_offset(t_cor *cor, t_token *token, size_t nb_bytes)
 {
 	t_offset	*offset;
 	t_offset	*new;
@@ -57,7 +66,7 @@ static int	store_offset(t_cor *cor, t_token *token, size_t nb_bytes)
 	new->name = token->str;
 	new->start = cor->pos;
 	new->pos = cor->size;
-	new->byte = nb_bytes;
+	new->nb_bytes = nb_bytes;
 	new->next = NULL;
 	if (!cor->offset)
 		cor->offset = new;
@@ -71,7 +80,7 @@ static int	store_offset(t_cor *cor, t_token *token, size_t nb_bytes)
 	return (OK);
 }
 
-int					offsets(t_cor *cor, t_token *token, size_t nb_bytes)
+int				offsets(t_cor *cor, t_token *token, size_t nb_bytes)
 {
 	t_label		*label;
 

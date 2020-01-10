@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:00:37 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/10 00:45:39 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/10 14:34:25 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ int		get_indir(char *input, size_t *n)
 		type = type | T_LAB;
 	while (ft_isdigit(input[i]))
 		i++;
+	if (ft_islower(input[i]))
+	{
+			while (ft_islower(input[i]))
+				i++;
+			type = T_INS;
+	}
 	*n = i;
 	return (type);
 }

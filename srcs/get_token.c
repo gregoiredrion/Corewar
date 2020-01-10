@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:25:25 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/09 23:28:14 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/10 15:15:33 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,11 @@ int				get_type(char *input, size_t *n)
 //	type = 0;
 	if (input[0] == '"')
 		return (get_str(input, n));
-	else if (input[0] == '\n' && *n++)
+	else if (input[0] == '\n' && ++(*n))
 		return (T_NEW);//Add token newline and return i + 1
-	else if (input[0] == '\0' && *n++)
+	else if (input[0] == '\0' && ++(*n))
 		return (T_EOF);//Add token EOF and return i + 1
-	else if (input[0] == SEPARATOR_CHAR && *n++)
+	else if (input[0] == SEPARATOR_CHAR && ++(*n))
 		return (T_SEP);//Add token T_SEP and return i + 1
 	else if (input[0] == '.')
 		return (get_cmd(input, n));

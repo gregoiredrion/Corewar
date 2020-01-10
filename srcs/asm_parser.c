@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 16:19:12 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/10 00:53:01 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/10 15:23:52 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,8 @@ int 		asm_parser(t_cor *cor, char *file)
 	pos  = 1;
 
 	stock_fd(cor, file);
-
-	if (trim_file(&(cor->file)) == -1)
-		return (MALLOC_ERROR);
+	//if (trim_file(&(cor->file)) == -1)
+		//return (MALLOC_ERROR);
 	while (i < cor->size)
 	{
 		i = skip_comment(cor, i, &(cor->line), &pos);
@@ -58,6 +57,6 @@ int 		asm_parser(t_cor *cor, char *file)
 		i += add;
 		i = skip_newline(cor, i, &(cor->line), &pos);
 	}
-	display_tokens(cor->tokens);
+	//display_tokens(cor->tokens);
 	return (OK);
 }

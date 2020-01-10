@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 16:02:31 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/10 00:53:12 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/10 15:21:19 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void		pushback(t_cor *cor, t_token *add)
 char	*change_settings(char *input, size_t *i, size_t *n)
 {
 	*i = *i + 1;
-	*n = *n -1;
+	*n = *n - 1;
 	return (input + 1);
 }
 
@@ -66,19 +66,16 @@ int		tokenization(t_cor *cor, char *input, size_t col, size_t line)
 	size_t	i;
 
 	n = 0;
+	//ft_printf("===\n%s\n==\n", input);
 	type = get_type(input, &n);
-	i = n + 1;
+	i = n;
 	if (type == T_STR)
-	{
 		input = change_settings(input, &i, &n);
-		//n--;
-		//i++;
-	}
 	token_string = ft_strndup(input, n);
 	if (type & (T_NAM | T_CMT))
 		get_cmd_type(&type, token_string);
 	if (type == 0)
-		return (ERROR);// Do lexical Error function ! Avant ???
+		return (lexical_error(line, col));// Do lexical Error function ! Avant ???
 	token = create_token(token_string, type, col, line);
 	pushback(cor, token);
 	//display_tokens(token);

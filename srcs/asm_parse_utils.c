@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 14:21:47 by gdrion            #+#    #+#             */
-/*   Updated: 2019/12/29 16:17:43 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/10 14:58:11 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,12 @@ int			skip_newline(t_cor *cor, size_t i, size_t *line, size_t *pos)
 			(*line)++;
 			*pos = i + 1;
 			nl = i;
+			break;
 		}
 		i++;
 	}
-	if (cor->tokens && nl)
-		split_input(cor, file, nl, *line);//tokenize newline
+	//if (cor->tokens && nl)
+		//split_input(cor, file, nl, *line);//tokenize newline
 	return (i);
 }
 
