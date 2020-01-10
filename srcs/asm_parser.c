@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 16:19:12 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/10 17:17:21 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/10 17:38:39 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,16 @@ int 		asm_parser(t_cor *cor, char *file)
 {
 	size_t	i;
 	size_t 	col;
-	size_t	add;
+	int		add;
 
 	i = 0;
 	col = 1;
 	stock_fd(cor, file);
 	while (i < cor->size)
 	{
-		i += skip_nl(cor, cor->file + i, &(cor->line), &col);
+		if ((add = skip_nl(cor, cor->file + i, &(cor->line), &col)) == -1)
+			return (MALLOC_ERROR);
+		i += add;
 		if (!(add = tokenization(cor, cor->file + i, &col, cor->line)))
 			return (ERROR);
 		i += add;

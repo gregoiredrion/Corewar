@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 14:21:47 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/10 17:04:52 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/10 17:36:40 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int				skip_nl(t_cor *cor, char *input, size_t *line, size_t *col)
 		if (input[i] == '\n')
 		{
 			if (!add)
-				if (add_newline_token(cor, *col, *line) == -1)
+				if (add_newline_token(cor, *(col) - 1, *line) == -1)
 					return (MALLOC_ERROR);
 			add++;
 			*col = 1;

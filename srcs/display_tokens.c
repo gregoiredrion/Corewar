@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/29 13:42:31 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/08 16:25:15 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/10 17:13:52 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@ static char		*id_token(t_token *token)
 {
 	if (token->type == T_REG)
 		return ("REGISTER");
+	if (token->type == (T_DIR | T_LAB))
+		return ("DIRECT_LABEL");
+	if (token->type == (T_IND | T_LAB))
+		return ("INDIRECT_LABEL");
 	else if (token->type == T_DIR)
 		return ("DIRECT");
 	else if (token->type == T_IND)
@@ -39,9 +43,9 @@ void			display_tokens(t_token *tokens)
 	while (tokens)
 	{
 		if (tokens->type == T_NEW)
-			printf("\n");
+			printf("[NEWLINE] \n");
 		else
-			ft_printf("[%s] = %s ", id_token(tokens), tokens->str);
+			ft_printf("[%s][%d:%d] ", id_token(tokens), tokens->line, tokens->col/*, tokens->str*/);
 		tokens = tokens->next;
 	}
 	printf("\n");
