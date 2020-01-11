@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 16:37:59 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/10 21:05:14 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/11 01:27:07 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,8 @@ int		main(int argc, char **argv)
   if (!process_tokens(&cor))
         return (ERROR);
 	cor.header.prog_size = reverse_int32(cor.size);
-	//last offsets
 	if (!(cor.name = create_cor_file(&cor)))
 		return (error_msg(-1));
-	ft_printf("FINAL SIZE: %d\n", cor.size);
 	ft_printf("Writing output program to %s\n", cor.name);
 	//free
 	return (0);

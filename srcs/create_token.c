@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 17:00:43 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/10 17:05:47 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/11 01:25:22 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void			pushback_token(t_cor *cor, t_token *add)
 {
 	t_token	*tmp;
+
 	if (!cor->tokens)
 	{
 		cor->tokens = add;

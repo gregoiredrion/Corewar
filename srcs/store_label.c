@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 14:59:07 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/10 23:49:26 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/11 01:31:51 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static t_label	*init_label(char *name, size_t pos)
 	return (new);
 }
 
-t_token				*store_label(t_cor *cor, t_token *label)
+t_token			*store_label(t_cor *cor, t_token *label)
 {
 	t_label		*new;
 

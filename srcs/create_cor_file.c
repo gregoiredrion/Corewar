@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 18:43:49 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/10 20:25:47 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/11 01:23:40 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static char	*file_name(char *name)
 	return (new);
 }
 
-static void write_file(t_cor *cor, int fd)
+static void	write_file(t_cor *cor, int fd)
 {
 	write(fd, &cor->header, sizeof(cor->header));
 	write(fd, cor->prog, cor->size);

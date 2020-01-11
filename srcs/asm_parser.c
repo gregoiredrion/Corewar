@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 16:19:12 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/10 20:31:51 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/11 01:22:26 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int		stock_fd(t_cor *cor, char *file)
 {
-	int 	ret;
+	int		ret;
 	char	*new;
 	char	buffer[BUFF_SIZE + 1];
 
@@ -38,10 +38,10 @@ static int		stock_fd(t_cor *cor, char *file)
 	return (ret == -1 ? -1 : 1);
 }
 
-int 		asm_parser(t_cor *cor, char *file)
+int				asm_parser(t_cor *cor, char *file)
 {
 	size_t	i;
-	size_t 	col;
+	size_t	col;
 	int		add;
 
 	i = 0;

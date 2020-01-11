@@ -6,27 +6,25 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:47:58 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/11 00:47:29 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/11 01:14:47 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-void write_prog(t_cor *cor, int add, size_t nb_bytes)
+void	write_prog(t_cor *cor, int add, size_t nb_bytes)
 {
-  //ft_printf("add: %d\n", add);
-  //ft_printf("size = %d && byte = %d\n\n", cor->size, nb_bytes);
-  if (cor->size + nb_bytes + 1 >= cor->max)
-  {
-    cor->prog = realloc(cor->prog, cor->max * 2);
-    ft_bzero(cor->prog + cor->max, cor->max);
-    cor->max *= 2;
-  }
-  if (nb_bytes == 1)
-    cor->prog[cor->size] = (char)add;
-  else if (nb_bytes == 2)
-    *((short *)&(cor->prog[cor->size])) = reverse_int16(add);
-  else if (nb_bytes == 4)
-    *((int *)&(cor->prog[cor->size])) = reverse_int32(add);
-  cor->size += nb_bytes;
+	if (cor->size + nb_bytes + 1 >= cor->max)
+	{
+		cor->prog = realloc(cor->prog, cor->max * 2);
+		ft_bzero(cor->prog + cor->max, cor->max);
+		cor->max *= 2;
+	}
+	if (nb_bytes == 1)
+		cor->prog[cor->size] = (char)add;
+	else if (nb_bytes == 2)
+		*((short *)&(cor->prog[cor->size])) = reverse_int16(add);
+	else if (nb_bytes == 4)
+		*((int *)&(cor->prog[cor->size])) = reverse_int32(add);
+	cor->size += nb_bytes;
 }

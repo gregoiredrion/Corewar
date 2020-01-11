@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2ii + 19/i + 12/i + 18 i + 17:ii + 1:3i + 1 by wdeltenr          #+#    #+#             */
-/*   Updated: 2ii + 19/i + 12/i + 19 i + 16:i + 1i:58 by wdeltenr         ###   ########.fr       */
+/*   Created: 2020/01/11 01:24:11 by wdeltenr          #+#    #+#             */
+/*   Updated: 2020/01/11 01:24:29 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int		check_label(char *input)
 		if (!ft_strchr(LABEL_CHARS, input[i]) && input[i] != LABEL_CHAR)
 			return (ERROR);
 		if (input[i] == LABEL_CHAR)
-		lab_char++;
+			lab_char++;
 		i++;
 	}
 	if (lab_char != 1 || input[i - 1] != LABEL_CHAR)

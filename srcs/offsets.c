@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:30:56 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/11 00:51:15 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/11 01:31:36 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ static void		process_offset(t_cor *cor, t_label *label, t_offset *offset)
 	int		res;
 
 	res = label->pos - offset->start;
-  if (offset->nb_bytes == 2)
-    *((short *)&(cor->prog[offset->pos])) = reverse_int16(res);
-  else if (offset->nb_bytes == 4)
-    *((int *)&(cor->prog[offset->pos])) = reverse_int32(res);
+	if (offset->nb_bytes == 2)
+		*((short *)&(cor->prog[offset->pos])) = reverse_int16(res);
+	else if (offset->nb_bytes == 4)
+		*((int *)&(cor->prog[offset->pos])) = reverse_int32(res);
 }
 
 int				last_offsets(t_cor *cor)
@@ -89,7 +89,7 @@ int				offsets(t_cor *cor, t_token *token, size_t nb_bytes)
 	t_label		*label;
 
 	if ((label = find_label(token->str, cor->labels)))
-			write_prog(cor, label->pos - cor->pos, nb_bytes);
+		write_prog(cor, label->pos - cor->pos, nb_bytes);
 	else
 	{
 		if (store_offset(cor, token, nb_bytes) == -1)

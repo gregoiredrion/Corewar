@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:25:25 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/11 00:57:34 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/11 01:21:26 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int		get_str(char *input, size_t *n)
 {
-	size_t 	i;
+	size_t		i;
 
 	i = 1;
 	while (input[i] && input[i] != '"')
@@ -74,19 +74,19 @@ int				get_type(char *input, size_t *n)
 	if (input[0] == '"')
 		return (get_str(input, n));
 	else if (input[0] == '\n' && ++(*n))
-		return (T_NEW);//Add token newline and return i + 1
+		return (T_NEW);
 	else if (input[0] == '\0' && ++(*n))
-		return (T_EOF);//Add token EOF and return i + 1
+		return (T_EOF);
 	else if (input[0] == SEPARATOR_CHAR && ++(*n))
-		return (T_SEP);//Add token T_SEP and return i + 1
+		return (T_SEP);
 	else if (input[0] == '.')
 		return (get_cmd(input, n));//if symbal like + etc ->lexical
 	else if (input[0] == DIRECT_CHAR)
 		return (get_dir(input, n));//if symbal like + etc ->lexical
 	else if (input[0] == LABEL_CHAR || ft_isdigit(input[0]))
-		return get_indir(input, n);//if symbal like + etc ->lexical
+		return (get_indir(input, n));//if symbal like + etc ->lexical
 	else if (input[0] == 'r')
 		return ((type = get_reg(input, n)) != 0 ? type : get_instr(input, n));//if symbal like + etc ->lexical
 	else
-		return get_instr(input, n);//C'est pas joli
+		return (get_instr(input, n));//C'est pas joli
 }
