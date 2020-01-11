@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 15:27:46 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/11 01:41:11 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/11 21:29:52 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,11 +126,15 @@ void		write_prog(t_cor *cor, int add, size_t nb_bytes);
 int			process_tokens(t_cor *cor);
 int			instr_params(t_cor *cor, t_token *token, size_t nb_arg);
 
-
 /*
 ** Output
 */
 char	*create_cor_file(t_cor *cor);
+
+/*
+** Free
+*/
+void	free_all(t_cor *cor);
 
 //display_tokens
 void			display_tokens(t_token *tokens);

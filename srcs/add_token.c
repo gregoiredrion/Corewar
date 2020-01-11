@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 16:02:31 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/11 01:20:25 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/11 21:37:58 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int				tokenization(t_cor *cor, char *input, size_t *col, size_t line)
 	i = n;
 	if (type == T_STR)
 		input = change_settings(input, &i, &n);
-	token_string = ft_strndup(input, n);
+	token_string = ft_strndup(input, n);//protection?
 	if (type & (T_NAM | T_CMT))
 		get_cmd_type(&type, token_string);
 	if (type == 0)

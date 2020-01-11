@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 18:43:49 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/11 01:23:40 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/11 21:42:01 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ char		*create_cor_file(t_cor *cor)
 		S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
 		return (NULL);
 	write_file(cor, fd);
+	close(fd);
 	return (name);
 }
