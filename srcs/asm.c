@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 16:37:59 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/11 21:28:59 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/11 21:59:42 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int		main(int argc, char **argv)
 	cor.size = 0;
 	if (!(token_validity(&cor)))
 		printf("Token validity error msg\n");//free
-  if (!process_tokens(&cor))
-        return (ERROR);
+	if (!process_tokens(&cor))
+		return (ERROR);
 	cor.header.prog_size = reverse_int32(cor.size);
 	if (!(cor.name = create_cor_file(&cor)))
 		return (error_msg(-1));

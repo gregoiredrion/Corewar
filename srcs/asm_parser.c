@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 16:19:12 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/11 01:22:26 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/11 21:47:40 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ int				asm_parser(t_cor *cor, char *file)
 			return (ERROR);
 		i += add;
 	}
+	close(cor->fd);
 	return (OK);
 }

@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 15:38:32 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/11 01:30:38 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/11 22:37:56 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,13 @@ char		*type_to_str(int type)
 {//add indirect & direct label
 	if (type == T_REG)
 		return (ft_strdup("register"));
-	else if (type == T_DIR)
+	//else if (type == T_DIR + T_LAB)    ->only for some errors
+		//return (ft_strdup("direct_label"));
+	//else if (type == T_IND + T_LAB)
+		//return (ft_strdup("indirect_label"));
+	else if (type & T_DIR)
 		return (ft_strdup("direct"));
-	else if (type == T_IND)
+	else if (type & T_IND)
 		return (ft_strdup("indirect"));
 	else if (type == T_LAB)
 		return (ft_strdup("label"));
@@ -32,16 +36,15 @@ char		*type_to_str(int type)
 		return (ft_strdup("separator"));
 	else if (type == T_NEW)
 		return (ft_strdup("endline"));
-	return (ft_strdup("WAAAAAAAAAAAAAAA"));
+	return (NULL);
 }
 
-int			invalid_param(char *instr, int type, int param, size_t pos)
+int			invalid_param(char *instr, int error, int type, size_t pos)
 {
 	char	*tmp;
 
-param = 0; //Silence error . is param still needed
-	ft_printf("Invalid parameter \n");
-	if (type == NB_ARG)
+	ft_printf("Invalid parameter ");
+	if (error == NB_ARG)
 		ft_printf("count ");
 	else
 	{

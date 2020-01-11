@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/29 18:54:24 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/10 21:49:17 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/11 22:33:18 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ int	instr_params(t_cor *cor, t_token *token, size_t nb_arg)
 			i++;
 		}
 		else
-			return (ERROR);//wrong param
+			return (invalid_param(cor->op.name, ARG_TYPE, token->type, i));
 		if (token->type == T_SEP)
 			token = token->next;
-		else if (!(token->type & (T_EOF | T_NEW)))
-			return (ERROR);//wrong nb param
 	}
+	if (i < nb_arg || !(token->type & (T_EOF | T_NEW)))
+		return (invalid_param(cor->op.name, NB_ARG, token->type, i));
 	return (OK);
 }

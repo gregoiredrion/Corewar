@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:58:33 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/11 01:17:56 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/11 22:20:46 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int				process_tokens(t_cor *cor)
 	{
 		if (token->type & (T_NAM | T_CMT | T_INS | T_LAB))
 			token = store_tokens(cor, token);
-		if (token->type & T_NEW)
+		if (token && token->type & T_NEW)
 			token = token->next;
 		if (!token)
 			return (ERROR);
