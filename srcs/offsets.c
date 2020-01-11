@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:30:56 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/11 01:31:36 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/12 00:58:00 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,7 @@ static t_label	*find_label(char *offset, t_label *label)
 {
 	size_t	i;
 
-	if (offset[0] == DIRECT_CHAR)
-		i = 2;
-	else
-		i = 1;
+	i = (offset[0] == DIRECT_CHAR) ? 2 : 1;
 	while (label)
 	{
 		if (!ft_strcmp(label->name, offset + i))
@@ -44,14 +41,17 @@ int				last_offsets(t_cor *cor)
 {
 	t_offset	*offset;
 	t_label		*label;
+	size_t		i;
 
 	offset = cor->offset;
 	while (offset)
 	{
+		i = (offset->name[0] == DIRECT_CHAR) ? 2 : 1;
 		if (!(label = find_label(offset->name, cor->labels)))
 		{
-			ft_printf("No such label lie while attempting to dereference token "
-			"[TOKEN][007:007] DIRECT_LABEL \"%s\"", offset->name);
+			ft_printf("No such label %s while attempting to dereference token "
+			"[TOKEN][%03d:%03d] DIRECT_LABEL \"%s\"\n", offset->name + i,
+			offset->token->line, offset->token->col, offset->name);
 			return (ERROR);
 		}
 		process_offset(cor, label, offset);
@@ -71,6 +71,7 @@ static int		store_offset(t_cor *cor, t_token *token, size_t nb_bytes)
 	new->start = cor->pos;
 	new->pos = cor->size;
 	new->nb_bytes = nb_bytes;
+	new->token = token;
 	new->next = NULL;
 	if (!cor->offset)
 		cor->offset = new;

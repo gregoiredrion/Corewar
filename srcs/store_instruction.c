@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 19:41:23 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/11 01:16:19 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/11 22:20:20 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,14 @@ t_token			*store_instruction(t_cor *cor, t_token *token)
 
 	i = 0;
 	if (!find_instruction(cor, token))
-		return (ERROR);//unknowm instr
+		return (NULL);//unknowm instr
 	while (i < cor->op.nb_arg)
 	{
 		cor->tab[i] = cor->op.arg_type[i];
 		i++;
 	}
 	if (!instr_params(cor, token->next, cor->op.nb_arg))
-		return (ERROR);
+		return (NULL);
 	if (cor->op.code_octet)
 		write_prog(cor, (char)total_arg(cor->tab, cor->op.nb_arg), 1);
 	return (store_params(cor, token->next));
