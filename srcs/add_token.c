@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 16:02:31 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/10 17:19:50 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/11 00:39:19 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ int		tokenization(t_cor *cor, char *input, size_t *col, size_t line)
 	if (type & (T_NAM | T_CMT))
 		get_cmd_type(&type, token_string);
 	if (type == 0)
+	{
+		ft_printf("%.7s\n", input);
 		return (lexical_error(line, *col));// Do lexical Error function ! Avant ???
+	}
 	if (!(token = create_token(token_string, type, *col, line)))
 		return (MALLOC_ERROR);
 	pushback_token(cor, token);

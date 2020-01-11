@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 14:21:47 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/10 17:36:40 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/11 00:50:48 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static size_t	skip_comment(char *input)
 	size_t	i;
 
 	i = 0;
-	while (input[i] != '\n' && input[i])
+	while (input[i] && input[i] != '\n')
 		i++;
 	return (i);
 }
@@ -44,7 +44,7 @@ int				skip_nl(t_cor *cor, char *input, size_t *line, size_t *col)
 
 	add = 0;
 	i = 0;
-	while (ft_isblank(input[i]))
+	while (ft_isblank(input[i]) || input[i] == '#')
 	{
 		if (input[i] == '\n')
 		{
@@ -56,7 +56,7 @@ int				skip_nl(t_cor *cor, char *input, size_t *line, size_t *col)
 			(*line)++;
 		}
 		else if (input[i] == '#')
-			i += skip_comment(input + i);
+			i += skip_comment(input + i) - 1;
 		i++;
 		*col = *col + 1;
 	}

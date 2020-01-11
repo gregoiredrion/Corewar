@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 15:27:46 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/10 17:18:50 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/10 23:55:30 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct	s_cor
 	int				fd;
 	size_t			flag;
 	char			*file;
+	t_arg_type	tab[3];
 	size_t			size;
 	size_t			line;
 	size_t			pos;
@@ -88,10 +89,11 @@ int		upper(char *str);
 int		blank(char *str);
 
 int		check_format_arg(char *arg, int type);
-t_op	store_instr(t_token *token);
+t_token		*store_instruction(t_cor *cor, t_token *token);
 //int		store_params(t_cor *cor, char *params);
-int		store_label(t_cor *cor, char *label);
-int		store_cmd(t_cor *cor, char *cmd, char *raw);
+t_token		*store_label(t_cor *cor, t_token *label);
+t_token		*store_cmd(t_cor *cor, t_token *token);
+t_token		*store_params(t_cor *cor, t_token *token);
 int		store_header(t_cor *cor, t_token *token);
 char	*create_cor_file(t_cor *cor);
 int 	asm_parser(t_cor *cor, char *file);
@@ -105,6 +107,7 @@ int		lexical_error(size_t line, size_t col);
 t_token	*syntax_error(t_token *token);
 int		invalid_instr(t_token *token);
 
+int		last_offsets(t_cor *cor);
 int		tokenisation(char *input);
 int		check_ind(char *input, size_t i);
 int		check_label(char *input);
@@ -123,7 +126,8 @@ int		get_reg(char *input, size_t *n);
 int		get_indir(char *input, size_t *n);
 int		get_type(char *input, size_t *n);
 int		tokenization(t_cor *cor, char *input, size_t *col, size_t line);
-
+int		process_tokens(t_cor *cor);
+int		instr_params(t_cor *cor, t_token *token, size_t nb_arg);
 //display_tokens
 void			display_tokens(t_token *tokens);
 

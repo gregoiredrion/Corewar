@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 15:38:32 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/10 14:12:22 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/10 17:29:35 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,12 @@ t_token		*syntax_error(t_token *token)
 	if (!(tmp = type_to_str(token->type)))
 		return (NULL);
 	tmp = ft_str_to_upper(tmp);
-	ft_printf("Syntax error at token [TOKEN][%03d:%03d] %s \"%s\"\n", token->line,
-		token->col, tmp, token->str);
+	if (token->type == T_NEW)
+	ft_printf("Syntax error at token [TOKEN][%03d:%03d] %s\n", token->line,
+		token->col, tmp);
+	else
+		ft_printf("Syntax error at token [TOKEN][%03d:%03d] %s \"%s\"\n", token->line,
+			token->col, tmp, token->str);
 	ft_strdel(&tmp);
 	return (NULL);
 }

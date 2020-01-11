@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_label.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 14:59:07 by wdeltenr          #+#    #+#             */
-/*   Updated: 2019/12/18 13:58:53 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/10 23:49:26 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ static void		pushback(t_cor *cor, t_label *add)
 	t_label		*tmp;
 
 	if (!cor->labels)
+	{
 		cor->labels = add;
+		return ;
+	}
 	tmp = cor->labels;
 	while (tmp->next)
 		tmp = tmp->next;
@@ -30,18 +33,18 @@ static t_label	*init_label(char *name, size_t pos)
 
 	if (!(new = malloc(sizeof(t_label))))
 		return (NULL);
-	new->name = name;
+	new->name = ft_strndup(name, ft_strlen(name) - 1);
 	new->pos = pos;
 	new->next = NULL;
 	return (new);
 }
 
-int				store_label(t_cor *cor, char *label)
+t_token				*store_label(t_cor *cor, t_token *label)
 {
 	t_label		*new;
 
-	if (!(new = init_label(label, cor->size)))
-		return (MALLOC_ERROR);
+	if (!(new = init_label(label->str, cor->size)))
+		return (NULL);
 	pushback(cor, new);
-	return (OK);
+	return (label->next);
 }

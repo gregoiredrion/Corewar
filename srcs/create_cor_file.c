@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_cor_file.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdeltenr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 18:43:49 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/07 15:20:18 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/10 20:25:47 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ char		*create_cor_file(t_cor *cor)
 
 	if (!(name = file_name(cor->name)))
 		return (NULL);
-	if ((fd = open(name, O_CREAT | O_RDWR | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
+	if ((fd = open(name, O_CREAT | O_RDWR | O_TRUNC,
+		S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
 		return (NULL);
 	write_file(cor, fd);
 	return (name);

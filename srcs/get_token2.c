@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:00:37 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/10 14:34:25 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/10 16:46:57 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,13 @@ int		get_reg(char *input, size_t *n)
 int		get_instr(char *input, size_t *n)
 {
 	size_t	i;
+	size_t	j;
 	int		type;
 
 	type = T_INS;
 	i = 0;
-	while (ft_islower(input[i]) || ft_isdigit(input[i]))
+	j = 0;
+	while (ft_islower(input[i]) || ft_isdigit(input[i]) || input[i] == '_')
 		i++;
 	if (input[i] == LABEL_CHAR)
 	{

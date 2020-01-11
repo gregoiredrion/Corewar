@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   store_instruction.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
+/*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/08 17:45:35 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/09 19:18:34 by wdeltenr         ###   ########.fr       */
+/*   Created: 2020/01/10 19:41:23 by wdeltenr          #+#    #+#             */
+/*   Updated: 2020/01/11 01:09:57 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+extern t_op	op_tab[];
 
 static char			total_arg(t_arg_type arg_type[], size_t nb_arg)
 {
@@ -29,70 +31,40 @@ static char			total_arg(t_arg_type arg_type[], size_t nb_arg)
 	return (tot);
 }
 
-static int	check_possibilities(t_arg_type arg_type[], size_t nb_arg)
+static int						find_instruction(t_cor *cor, t_token *token)
 {
 	size_t	i;
 
 	i = 0;
-	while (i < nb_arg)
+  cor->pos = cor->size;
+	while (op_tab[i].name)
 	{
-		if (arg_type[i] & (arg_type[i] - 1))
-			return (true);
-			i++;
+		if (!ft_strcmp(token->str, op_tab[i].name))
+			break ;
+		i++;
 	}
-	return (false);
-}
-
-static int	write_param(t_cor *cor, t_token *param, size_t nb_bytes)
-{
-	int 	output;
-
-	output = 0;
-	if (param->type & T_LAB)
-		if (offsets(cor, param, nb_bytes) == MALLOC_ERROR)
-			return (MALLOC_ERROR);
-	if (nb_bytes == 1)
-		write_prog(cor, (char)ft_atoi(param->str + 1), 1);
-	else if (nb_bytes == 2)
-	{
-		if (param->type & T_DIR)
-			output = (short)ft_atoi(param->str + 1);
-		else
-			output = (short)ft_atoi(param->str);
-		write_prog(cor, (short)output, 2);
-	}
-	else
-	{
-		output = ft_atoi(param->str + 1);
-		write_prog(cor, output, 4);
-	}
+	if (!op_tab[i].name)
+		return (ERROR);
+	cor->op = op_tab[i];
+	write_prog(cor, (char)cor->op.opcode, 1);
 	return (OK);
 }
 
-static t_token	*store_params(t_cor *cor, t_token *param)
+t_token   *store_instruction(t_cor *cor, t_token *token)
 {
-	size_t	nb_bytes;
+  size_t      i;
 
-	while (param && param->type != T_NEW)
-	{
-		if (param->type & T_SEP)
-			param = param->next;
-		if (param->type & T_REG)
-			nb_bytes = 1;
-		if (param->type & T_DIR)
-			nb_bytes = (cor->op.label_size == 1) ? 2 : 4;
-		if (param->type & T_IND)
-			nb_bytes = 2;
-		if (write_param(cor, param, nb_bytes) == MALLOC_ERROR)
-			return (NULL);
-	}
-	return (param);
-}
-
-t_token		*store_instruction(t_cor *cor, t_token *token)
-{
-
-	if (check_possibilities(cor->op.arg_type, cor->op.nb_arg))
-		write_prog(cor, total_arg(cor->op.arg_type, cor->op.nb_arg), 1);
-	return (store_params(cor, token->next));
+  i = 0;
+  if (!find_instruction(cor, token))
+    return (ERROR);//unknowm instr
+  while (i < cor->op.nb_arg)
+  {
+    cor->tab[i] = cor->op.arg_type[i];
+    i++;
+  }
+  if (!instr_params(cor, token->next, cor->op.nb_arg))
+    return (ERROR);
+  if (cor->op.code_octet)
+  	write_prog(cor, (char)total_arg(cor->tab, cor->op.nb_arg), 1);
+  return (store_params(cor, token->next));
 }
