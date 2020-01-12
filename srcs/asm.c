@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 16:37:59 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/12 20:18:43 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/12 21:18:10 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,20 @@ int		main(int argc, char **argv)
 		return (usage());
 	if ((create_cor(&cor)) == -1)
 		return (error_msg(MALLOC_ERROR));
-	printf("Prout1\n");
 	cor.name = argv[1];
 	if (!(cor.prog = malloc(sizeof(char) * cor.max)))
 		return (error_msg(MALLOC_ERROR));
-	printf("Prout2\n");
 	cor.header.magic = reverse_int32(COREWAR_EXEC_MAGIC);
 	if (asm_parser(&cor, argv[1]) < 1)
 		return (0);
-	printf("Prout3\n");
 	cor.size = 0;
 	if ((ret = token_validity(&cor)) < 1)
 		return (free_all(&cor, ret));
-	printf("Prout4\n");
 	if ((ret = process_tokens(&cor) < 1))
 			return (free_all(&cor, ret));
-	printf("Prout5\n");
 	cor.header.prog_size = reverse_int32(cor.size);
 	if (!(cor.name = create_cor_file(&cor, &ret)))
 		return (free_all(&cor, ret));
-	printf("Prout6\n");
 	ft_printf("Writing output program to %s\n", cor.name);
 	return (free_all(&cor, OK));
 }
