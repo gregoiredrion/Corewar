@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:00:37 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/12 22:29:15 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/12 22:51:08 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,16 @@ int			get_indir(char *input, size_t *n)
 int			get_reg(char *input, size_t *n)
 {
 	size_t	i;
+	int		type;
 
+	type = T_REG;
 	i = 1;
 	while (ft_isdigit(input[i]))
 		i++;
+	if (ft_atoi(input + 1) > 99)
+		type = T_INS;
 	*n = i;
-	return (ft_islower(input[i]) ? 0 : T_REG);
+	return (ft_islower(input[i]) ? 0 : type);
 }
 
 int			get_instr(char *input, size_t *n)
