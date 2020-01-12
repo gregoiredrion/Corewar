@@ -6,12 +6,11 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 00:05:29 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/12 01:21:46 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/12 22:23:57 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
-
 
 int			is_labelchar(char c)
 {
@@ -20,7 +19,8 @@ int			is_labelchar(char c)
 
 static int	start_token_char(char c)
 {
-	return (c == '%' || c == ',' || c == ':' || c == '"' || c == '.' || c == '-');
+	return (c == '%' || c == ',' || c == ':' || c == '"' || c == '.' ||
+	c == '-');
 }
 
 int			authorized_char(char c)

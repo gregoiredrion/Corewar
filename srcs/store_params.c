@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 19:40:33 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/12 21:18:59 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/12 22:34:11 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	write_param(t_cor *cor, t_token *param, size_t nb_bytes, int *error)
 {
-	int 	output;
+	int		output;
 
 	output = 0;
 	if (param->type & T_LAB)
@@ -35,7 +35,7 @@ static int	write_param(t_cor *cor, t_token *param, size_t nb_bytes, int *error)
 	return (OK);
 }
 
-t_token	*store_params(t_cor *cor, t_token *param, int *error)
+t_token		*store_params(t_cor *cor, t_token *param, int *error)
 {
 	size_t	nb_bytes;
 

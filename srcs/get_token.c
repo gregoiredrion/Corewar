@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:25:25 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/12 01:31:49 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/12 22:28:58 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int		get_dir(char *input, size_t *n)
 
 	i = 1;
 	if (input[i] == LABEL_CHAR)
-		return get_dir_label(input, n);
+		return (get_dir_label(input, n));
 	if (input[i] == '-')
 		i++;
 	while (input[i] && ft_isdigit(input[i]))
@@ -79,13 +79,13 @@ int				get_type(char *input, size_t *n)
 	else if (input[0] == SEPARATOR_CHAR && ++(*n))
 		return (T_SEP);
 	else if (input[0] == '.')
-		return (get_cmd(input, n));//if symbal like + etc ->lexical
+		return (get_cmd(input, n));
 	else if (input[0] == DIRECT_CHAR)
-		return (get_dir(input, n));//if symbal like + etc ->lexical
+		return (get_dir(input, n));
 	else if (input[0] == LABEL_CHAR || ft_isdigit(input[0]) || input[0] == '-')
-		return (get_indir(input, n));//if symbal like + etc ->lexical
+		return (get_indir(input, n));
 	else if (input[0] == 'r')
-		return ((type = get_reg(input, n)) != 0 ? type : get_instr(input, n));//if symbal like + etc ->lexical
+		return ((type = get_reg(input, n)) != 0 ? type : get_instr(input, n));
 	else
-		return (get_instr(input, n));//C'est pas joli
+		return (get_instr(input, n));
 }

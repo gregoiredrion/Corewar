@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:00:37 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/12 01:29:09 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/12 22:29:15 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static int	get_indir_label(char *input, size_t *n)
 		i++;
 	*n = i;
 	return (T_LAB | T_DIR);
-
 }
 
 int			get_indir(char *input, size_t *n)
@@ -71,6 +70,5 @@ int			get_instr(char *input, size_t *n)
 		type = T_LAB;
 	}
 	*n = i;
-//	printf("Type in instr equals %d\n", type);
 	return (type);
 }

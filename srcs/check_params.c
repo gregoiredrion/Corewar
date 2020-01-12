@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/29 18:54:24 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/12 19:46:14 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/12 22:24:45 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	instr_params(t_cor *cor, t_token *token, size_t nb_arg)
 	{
 		if (cor->tab[i] & token->type)
 		{
-			cor->tab[i] = (token->type & T_LAB) ? token->type - T_LAB : token->type;
+			cor->tab[i] = (token->type & T_LAB) ? token->type - T_LAB :
+			token->type;
 			token = token->next;
 			i++;
 		}

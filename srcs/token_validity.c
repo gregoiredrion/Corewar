@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/29 18:31:19 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/10 17:27:55 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/12 22:35:15 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static t_token		*param_token(t_token *token, int type)
 			if (!(token->type & (T_REG | T_DIR | T_IND)))
 				return (syntax_error(token));
 			token = token->next;
-			if (token->type == T_SEP && token->next->type & (T_REG | T_DIR | T_IND))
+			if (token->type == T_SEP &&
+			token->next->type & (T_REG | T_DIR | T_IND))
 				token = token->next;
 			else if (token->type == T_SEP)
 				return (syntax_error(token->next));
@@ -75,7 +76,7 @@ static t_token		*starting_token(t_token *token)
 			return (syntax_error(token));
 		if (token->type == T_INS)
 			return (starting_token(token));
-		if (token->type == T_NEW)// what about eof?
+		if (token->type == T_NEW)
 			return (starting_token(token->next));
 		return (token);
 	}

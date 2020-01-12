@@ -6,13 +6,13 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 19:41:23 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/12 20:30:22 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/12 22:41:23 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-extern t_op	op_tab[];
+extern t_op	g_op_tab[];
 
 static char		total_arg(t_arg_type arg_type[], size_t nb_arg)
 {
@@ -37,15 +37,15 @@ static int		find_instruction(t_cor *cor, t_token *token, int *error)
 
 	i = 0;
 	cor->pos = cor->size;
-	while (op_tab[i].name)
+	while (g_op_tab[i].name)
 	{
-		if (!ft_strcmp(token->str, op_tab[i].name))
+		if (!ft_strcmp(token->str, g_op_tab[i].name))
 			break ;
 		i++;
 	}
-	if (!op_tab[i].name)
+	if (!g_op_tab[i].name)
 		return (ERROR);
-	cor->op = op_tab[i];
+	cor->op = g_op_tab[i];
 	if ((write_prog(cor, (char)cor->op.opcode, 1, error)) == -1)
 		return (MALLOC_ERROR);
 	return (OK);
@@ -65,9 +65,9 @@ t_token			*store_instruction(t_cor *cor, t_token *token, int *error)
 	}
 	if (!instr_params(cor, token->next, cor->op.nb_arg))
 		return (NULL);
-
 	if (cor->op.code_octet)
-		if ((write_prog(cor, total_arg(cor->tab, cor->op.nb_arg), 1, error)) == -1)
+		if ((write_prog(cor, total_arg(cor->tab, cor->op.nb_arg), 1, error)) ==
+		-1)
 			return (NULL);
 	return (store_params(cor, token->next, error));
 }

@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 16:37:59 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/12 21:18:10 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/12 22:22:54 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		main(int argc, char **argv)
 	if ((ret = token_validity(&cor)) < 1)
 		return (free_all(&cor, ret));
 	if ((ret = process_tokens(&cor) < 1))
-			return (free_all(&cor, ret));
+		return (free_all(&cor, ret));
 	cor.header.prog_size = reverse_int32(cor.size);
 	if (!(cor.name = create_cor_file(&cor, &ret)))
 		return (free_all(&cor, ret));

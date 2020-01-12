@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 15:27:46 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/12 20:24:41 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/12 22:42:22 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 
 # include "libft.h"
 # include "op.h"
-# include "define.h"
 
 # define MALLOC_ERROR -1
 # define ERROR 0
 # define OK 1
+
+# define NB_ARG 1
+# define ARG_TYPE 2
 
 # define COMMENT 0
 
@@ -77,75 +79,73 @@ typedef struct	s_cor
 	t_offset		*offset;
 	t_op			op;
 	t_token			*tokens;
-	header_t		header;
+	t_header		header;
 }				t_cor;
 
 /*
 ** Parsing
 */
-int			asm_parser(t_cor *cor, char *file);
-t_token		*create_token(char *input, int type, size_t col, size_t line);
-int			create_cor(t_cor *cor);
-int			skip_nl(t_cor *cor, char *input, size_t *line, size_t *col);
-int			tokenisation(char *input);
-int			check_ind(char *input, size_t i);
-int			check_label(char *input);
-int			check_cmd(char *input);
-int			check_dir(char *input);
-int			check_reg_instr(char *input);
-int			token_validity(t_cor *cor);
-int			get_instr(char *input, size_t *n);
-int			get_reg(char *input, size_t *n);
-int			get_indir(char *input, size_t *n);
-int			get_type(char *input, size_t *n);
-int			tokenization(t_cor *cor, char *input, size_t *col, size_t line);
-void		pushback_token(t_cor *cor, t_token *token);
-int			upper(char *str);
+int				asm_parser(t_cor *cor, char *file);
+t_token			*create_token(char *input, int type, size_t col, size_t line);
+int				create_cor(t_cor *cor);
+int				skip_nl(t_cor *cor, char *input, size_t *line, size_t *col);
+int				tokenisation(char *input);
+int				check_ind(char *input, size_t i);
+int				check_label(char *input);
+int				check_cmd(char *input);
+int				check_dir(char *input);
+int				check_reg_instr(char *input);
+int				token_validity(t_cor *cor);
+int				get_instr(char *input, size_t *n);
+int				get_reg(char *input, size_t *n);
+int				get_indir(char *input, size_t *n);
+int				get_type(char *input, size_t *n);
+int				tokenization(t_cor *cor, char *input, size_t *col, size_t line);
+void			pushback_token(t_cor *cor, t_token *token);
+int				upper(char *str);
 
 /*
 ** Error
 */
-int			usage(void);
-int			invalid_param(char *instr, int error, int type, size_t pos);
-int			lexical_error(size_t line, size_t col);
-t_token		*syntax_error(t_token *token);
-t_token		*invalid_instr(t_token *token);
-int			error_msg(int ret);
+int				usage(void);
+int				invalid_param(char *instr, int error, int type, size_t pos);
+int				lexical_error(size_t line, size_t col);
+t_token			*syntax_error(t_token *token);
+t_token			*invalid_instr(t_token *token);
+int				error_msg(int ret);
 
 /*
 ** Store and process tokens to prog
 */
-t_token		*store_instruction(t_cor *cor, t_token *token, int *error);
-t_token		*store_label(t_cor *cor, t_token *label, int *error);
-t_token		*store_cmd(t_cor *cor, t_token *token);
-t_token		*store_params(t_cor *cor, t_token *token, int *error);
-int			last_offsets(t_cor *cor);
-int			offsets(t_cor *cor, t_token *token, size_t nb_bytes);
-t_token		*store_comment(t_cor *cor, t_token *token);
-t_token		*store_name(t_cor *cor, t_token *token);
-int			write_prog(t_cor *cor, int add, size_t nb_bytes, int *error);
-int			process_tokens(t_cor *cor);
-int			instr_params(t_cor *cor, t_token *token, size_t nb_arg);
+t_token			*store_instruction(t_cor *cor, t_token *token, int *error);
+t_token			*store_label(t_cor *cor, t_token *label, int *error);
+t_token			*store_cmd(t_cor *cor, t_token *token);
+t_token			*store_params(t_cor *cor, t_token *token, int *error);
+int				last_offsets(t_cor *cor);
+int				offsets(t_cor *cor, t_token *token, size_t nb_bytes);
+int				write_prog(t_cor *cor, int add, size_t nb_bytes, int *error);
+int				process_tokens(t_cor *cor);
+int				instr_params(t_cor *cor, t_token *token, size_t nb_arg);
 
 /*
 ** Character authentification
 */
-int			authorized_char(char c);
-int			is_labelchar(char c);
-int			separating_char(char c);
+int				authorized_char(char c);
+int				is_labelchar(char c);
+int				separating_char(char c);
 
 /*
 ** Output
 */
-char		*create_cor_file(t_cor *cor, int *error);
+char			*create_cor_file(t_cor *cor, int *error);
 
 /*
 ** Free
 */
-int			free_all(t_cor *cor, int error);
+int				free_all(t_cor *cor, int error);
 
 //display_tokens
 char			*id_token(t_token *token);
-void		display_tokens(t_token *tokens);
+void			display_tokens(t_token *tokens);
 
 #endif

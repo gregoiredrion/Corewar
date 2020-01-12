@@ -6,22 +6,13 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 15:10:29 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/12 20:16:19 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/12 22:30:51 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-t_token	*store_cmd(t_cor* cor, t_token *token)
-{
-	if (token->type & T_NAM && token->next->type & T_STR)
-		return (store_name(cor, token->next));
-	if (token->type & T_CMT && token->next->type & T_STR)
-		return (store_comment(cor, token->next));
-	return (NULL);
-} 
-
-t_token	*store_comment(t_cor *cor, t_token *token)
+static t_token	*store_comment(t_cor *cor, t_token *token)
 {
 	if (ft_strlen(token->str) > PROG_NAME_LENGTH)
 	{
@@ -32,7 +23,7 @@ t_token	*store_comment(t_cor *cor, t_token *token)
 	return (token->next);
 }
 
-t_token	*store_name(t_cor *cor, t_token *token)
+static t_token	*store_name(t_cor *cor, t_token *token)
 {
 	if (ft_strlen(token->str) > COMMENT_LENGTH)
 	{
@@ -41,4 +32,13 @@ t_token	*store_name(t_cor *cor, t_token *token)
 	}
 	ft_strcpy(cor->header.prog_name, token->str);
 	return (token->next);
+}
+
+t_token			*store_cmd(t_cor *cor, t_token *token)
+{
+	if (token->type & T_NAM && token->next->type & T_STR)
+		return (store_name(cor, token->next));
+	if (token->type & T_CMT && token->next->type & T_STR)
+		return (store_comment(cor, token->next));
+	return (NULL);
 }
