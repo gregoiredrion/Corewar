@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 19:40:33 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/12 20:31:05 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/12 21:18:59 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static int	write_param(t_cor *cor, t_token *param, size_t nb_bytes, int *error)
 	}
 	else
 		output = ft_atoi(param->str + 1);
-	;
 	if (write_prog(cor, output, nb_bytes, error) == -1)
 		return (MALLOC_ERROR);
 	return (OK);
