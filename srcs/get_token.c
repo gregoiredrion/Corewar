@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:25:25 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/11 01:21:26 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/12 01:31:49 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ static int		get_str(char *input, size_t *n)
 	i = 1;
 	while (input[i] && input[i] != '"')
 		i++;
-	if (!input[i])
-		return (ERROR);// Do lexical error function
 	*n = i;
 	return (T_STR);
 }
@@ -32,31 +30,31 @@ static int		get_cmd(char *input, size_t *n)
 	i = 1;
 	while (input[i] && ft_islower(input[i]))
 		i++;
-	if (!input[i])
-		return (ERROR);	// Do lexical error function
 	*n = i;
 	return (T_NAM | T_CMT);
 }
 
-// To remodel imo
+static int		get_dir_label(char *input, size_t *n)
+{
+	size_t	i;
+
+	i = 2;
+	if (separating_char(input[i]))
+		return (ERROR);
+	while (is_labelchar(input[i]))
+		i++;
+	*n = i;
+	return (T_LAB | T_DIR);
+}
+
 static int		get_dir(char *input, size_t *n)
 {
 	size_t	i;
 
 	i = 1;
 	if (input[i] == LABEL_CHAR)
-	{
-		i++;
-		if (input[i + 1] == SEPARATOR_CHAR)
-			return (ERROR);//Actually not fine
-		while (ft_strchr(LABEL_CHARS, input[i]))
-			i++;
-		if (i == 2)
-			return (ERROR);
-		*n = i;
-		return (T_LAB | T_DIR);
-	};//do_label stuff
-	if (input[i] == '-' || input[i] == '+')
+		return get_dir_label(input, n);
+	if (input[i] == '-')
 		i++;
 	while (input[i] && ft_isdigit(input[i]))
 		i++;
@@ -70,7 +68,8 @@ int				get_type(char *input, size_t *n)
 {
 	int		type;
 
-//	type = 0;
+	if (!authorized_char(input[0]))
+		return (ERROR);
 	if (input[0] == '"')
 		return (get_str(input, n));
 	else if (input[0] == '\n' && ++(*n))
@@ -83,7 +82,7 @@ int				get_type(char *input, size_t *n)
 		return (get_cmd(input, n));//if symbal like + etc ->lexical
 	else if (input[0] == DIRECT_CHAR)
 		return (get_dir(input, n));//if symbal like + etc ->lexical
-	else if (input[0] == LABEL_CHAR || ft_isdigit(input[0]))
+	else if (input[0] == LABEL_CHAR || ft_isdigit(input[0]) || input[0] == '-')
 		return (get_indir(input, n));//if symbal like + etc ->lexical
 	else if (input[0] == 'r')
 		return ((type = get_reg(input, n)) != 0 ? type : get_instr(input, n));//if symbal like + etc ->lexical

@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 15:27:46 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/12 00:57:10 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/12 00:59:28 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,13 @@ t_token		*store_name(t_cor *cor, t_token *token);
 void		write_prog(t_cor *cor, int add, size_t nb_bytes);
 int			process_tokens(t_cor *cor);
 int			instr_params(t_cor *cor, t_token *token, size_t nb_arg);
+
+/*
+** Character authentification
+*/
+int			authorized_char(char c);
+int			is_labelchar(char c);
+int			separating_char(char c);
 
 /*
 ** Output
