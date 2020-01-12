@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 15:27:46 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/12 00:59:28 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/12 17:31:13 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct	s_token
 	size_t			col;
 	size_t			line;
 	char			*str;
+	size_t			nb_bytes;
 	struct s_token	*next;
 }				t_token;
 
