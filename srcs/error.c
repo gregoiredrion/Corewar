@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 15:38:32 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/11 22:37:56 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/12 19:37:18 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,9 @@ t_token		*syntax_error(t_token *token)
 	return (NULL);
 }
 
-int			invalid_instr(t_token *token)
+t_token		*invalid_instr(t_token *token)
 {
 	ft_printf("Invalid instruction at token [TOKEN][%03d:%03d] INSTRUCTION"
 		" \"%s\"\n", token->line, token->col, token->str);
-	return (ERROR);
+	return (NULL);
 }

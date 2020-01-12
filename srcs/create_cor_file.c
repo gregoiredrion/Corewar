@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 18:43:49 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/11 21:42:01 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/12 19:58:04 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	*file_name(char *name)
 
 	if (!ft_strchr(name, '.'))
 	{
-		if (!(new = ft_strdup(".cor")))
+			if (!(new = ft_strdup(".cor")))
 			return (NULL);
 	}
 	else
@@ -42,17 +42,27 @@ static void	write_file(t_cor *cor, int fd)
 	write(fd, cor->prog, cor->size);
 }
 
-char		*create_cor_file(t_cor *cor)
+char		*create_cor_file(t_cor *cor, int *error)
 {
 	int		fd;
 	char	*name;
 
 	if (!(name = file_name(cor->name)))
+	{
+		*error = MALLOC_ERROR;
 		return (NULL);
+	}
 	if ((fd = open(name, O_CREAT | O_RDWR | O_TRUNC,
 		S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
+	{
+		write(2, "Could not create .cor file\n", 27);
 		return (NULL);
+	}
 	write_file(cor, fd);
-	close(fd);
+	if (close(fd) == -1)
+	{
+		write (2, "Could not close .cor file\n", 26);
+		return (NULL);
+	}
 	return (name);
 }

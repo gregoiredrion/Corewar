@@ -6,17 +6,21 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 15:47:58 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/12 17:34:55 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/12 20:14:37 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-void	write_prog(t_cor *cor, int add, size_t nb_bytes)
+int		write_prog(t_cor *cor, int add, size_t nb_bytes, int *error)
 {
 	if (cor->size + nb_bytes + 1 >= cor->max)
 	{
-		cor->prog = realloc(cor->prog, cor->max * 2);
+		if (!(cor->prog = realloc(cor->prog, cor->max * 2)))
+		{
+			*error = MALLOC_ERROR;
+			return (MALLOC_ERROR);
+		}
 		ft_bzero(cor->prog + cor->max, cor->max);
 		cor->max *= 2;
 	}
@@ -27,4 +31,5 @@ void	write_prog(t_cor *cor, int add, size_t nb_bytes)
 	else if (nb_bytes == 4)
 		*((int *)&(cor->prog[cor->size])) = reverse_int32(add);
 	cor->size += nb_bytes;
+	return (OK);
 }

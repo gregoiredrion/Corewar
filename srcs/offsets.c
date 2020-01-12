@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:30:56 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/12 00:58:00 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/12 20:07:34 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,14 @@ static int		store_offset(t_cor *cor, t_token *token, size_t nb_bytes)
 int				offsets(t_cor *cor, t_token *token, size_t nb_bytes)
 {
 	t_label		*label;
+	int			error;
 
+	error = 0;
 	if ((label = find_label(token->str, cor->labels)))
-		write_prog(cor, label->pos - cor->pos, nb_bytes);
+	{
+		if ((write_prog(cor, label->pos - cor->pos, nb_bytes, &error)) == -1)
+			return (MALLOC_ERROR);
+	}
 	else
 	{
 		if (store_offset(cor, token, nb_bytes) == -1)

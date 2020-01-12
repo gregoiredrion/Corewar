@@ -6,13 +6,13 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/29 13:42:31 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/10 17:13:52 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/12 20:24:31 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-static char		*id_token(t_token *token)
+char			*id_token(t_token *token)
 {
 	if (token->type == T_REG)
 		return ("REGISTER");

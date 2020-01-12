@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 16:37:59 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/11 21:59:42 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/12 20:18:43 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,32 @@
 int		main(int argc, char **argv)
 {
 	t_cor	cor;
+	int		ret;
 
 	if (argc == 1)
 		return (usage());
 	if ((create_cor(&cor)) == -1)
-		return (error_msg(-1));
-	cor.name = argv[1];//don't forget flag
+		return (error_msg(MALLOC_ERROR));
+	printf("Prout1\n");
+	cor.name = argv[1];
 	if (!(cor.prog = malloc(sizeof(char) * cor.max)))
-		return (error_msg(-1));
+		return (error_msg(MALLOC_ERROR));
+	printf("Prout2\n");
 	cor.header.magic = reverse_int32(COREWAR_EXEC_MAGIC);
 	if (asm_parser(&cor, argv[1]) < 1)
-	{
-		printf("test\n");
 		return (0);
-	}
+	printf("Prout3\n");
 	cor.size = 0;
-	if (!(token_validity(&cor)))
-		printf("Token validity error msg\n");//free
-	if (!process_tokens(&cor))
-		return (ERROR);
+	if ((ret = token_validity(&cor)) < 1)
+		return (free_all(&cor, ret));
+	printf("Prout4\n");
+	if ((ret = process_tokens(&cor) < 1))
+			return (free_all(&cor, ret));
+	printf("Prout5\n");
 	cor.header.prog_size = reverse_int32(cor.size);
-	if (!(cor.name = create_cor_file(&cor)))
-		return (error_msg(-1));
+	if (!(cor.name = create_cor_file(&cor, &ret)))
+		return (free_all(&cor, ret));
+	printf("Prout6\n");
 	ft_printf("Writing output program to %s\n", cor.name);
-	free_all(&cor);
-	return (0);
+	return (free_all(&cor, OK));
 }

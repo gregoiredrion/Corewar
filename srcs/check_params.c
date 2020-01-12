@@ -6,20 +6,11 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/29 18:54:24 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/11 22:33:18 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/12 19:46:14 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
-
-t_token	*store_cmd(t_cor* cor, t_token *token)
-{
-	if (token->type & T_NAM && token->next->type & T_STR)
-		return (store_name(cor, token->next));
-	if (token->type & T_CMT && token->next->type & T_STR)
-		return (store_comment(cor, token->next));
-	return (NULL);
-}
 
 int	instr_params(t_cor *cor, t_token *token, size_t nb_arg)
 {

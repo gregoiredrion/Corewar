@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 16:02:31 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/12 01:31:34 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/12 19:23:42 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,12 @@ int				tokenization(t_cor *cor, char *input, size_t *col, size_t line)
 	i = n;
 	if (type == T_STR)
 		input = change_settings(input, &i, &n);
-	token_string = ft_strndup(input, n);//protection?
+	if (!(token_string = ft_strndup(input, n)))
+		return (MALLOC_ERROR);
 	if (type & (T_NAM | T_CMT))
 		get_cmd_type(&type, token_string);
 	if (type == 0)
-		return (lexical_error(line, *col));// Do lexical Error function ! Avant ???
+		return (lexical_error(line, *col));
 	if (!(token = create_token(token_string, type, *col, line)))
 		return (MALLOC_ERROR);
 	pushback_token(cor, token);

@@ -6,11 +6,20 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 15:10:29 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/10 20:36:11 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/12 20:16:19 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+t_token	*store_cmd(t_cor* cor, t_token *token)
+{
+	if (token->type & T_NAM && token->next->type & T_STR)
+		return (store_name(cor, token->next));
+	if (token->type & T_CMT && token->next->type & T_STR)
+		return (store_comment(cor, token->next));
+	return (NULL);
+} 
 
 t_token	*store_comment(t_cor *cor, t_token *token)
 {

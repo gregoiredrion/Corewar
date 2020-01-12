@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 14:59:07 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/11 01:31:51 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/12 20:12:42 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,22 @@ static t_label	*init_label(char *name, size_t pos)
 
 	if (!(new = malloc(sizeof(t_label))))
 		return (NULL);
-	new->name = ft_strndup(name, ft_strlen(name) - 1);
+	if (!(new->name = ft_strndup(name, ft_strlen(name) - 1)))
+		return (NULL);
 	new->pos = pos;
 	new->next = NULL;
 	return (new);
 }
 
-t_token			*store_label(t_cor *cor, t_token *label)
+t_token			*store_label(t_cor *cor, t_token *label, int *error)
 {
 	t_label		*new;
 
 	if (!(new = init_label(label->str, cor->size)))
+	{
+		*error = MALLOC_ERROR;
 		return (NULL);
+	}
 	pushback(cor, new);
 	return (label->next);
 }

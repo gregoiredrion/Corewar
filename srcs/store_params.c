@@ -6,13 +6,13 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 19:40:33 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/12 18:42:16 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/12 20:31:05 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-static int	write_param(t_cor *cor, t_token *param, size_t nb_bytes)
+static int	write_param(t_cor *cor, t_token *param, size_t nb_bytes, int *error)
 {
 	int 	output;
 
@@ -30,15 +30,17 @@ static int	write_param(t_cor *cor, t_token *param, size_t nb_bytes)
 	}
 	else
 		output = ft_atoi(param->str + 1);
-	write_prog(cor, output, nb_bytes);
+	;
+	if (write_prog(cor, output, nb_bytes, error) == -1)
+		return (MALLOC_ERROR);
 	return (OK);
 }
 
-t_token	*store_params(t_cor *cor, t_token *param)
+t_token	*store_params(t_cor *cor, t_token *param, int *error)
 {
 	size_t	nb_bytes;
 
-	while (param->type != T_NEW && param->type != T_EOF)
+	while (!(param->type & (T_NEW | T_EOF)))
 	{
 		if (param->type & T_SEP)
 			param = param->next;
@@ -48,7 +50,7 @@ t_token	*store_params(t_cor *cor, t_token *param)
 			nb_bytes = (cor->op.label_size == 1) ? 2 : 4;
 		if (param->type & T_IND)
 			nb_bytes = 2;
-		if (write_param(cor, param, nb_bytes) == MALLOC_ERROR)
+		if (write_param(cor, param, nb_bytes, error) == MALLOC_ERROR)
 			return (NULL);
 		param = param->next;
 	}

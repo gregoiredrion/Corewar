@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 15:27:46 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/12 18:28:08 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/12 20:24:41 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,21 +109,21 @@ int			usage(void);
 int			invalid_param(char *instr, int error, int type, size_t pos);
 int			lexical_error(size_t line, size_t col);
 t_token		*syntax_error(t_token *token);
-int			invalid_instr(t_token *token);
+t_token		*invalid_instr(t_token *token);
 int			error_msg(int ret);
 
 /*
 ** Store and process tokens to prog
 */
-t_token		*store_instruction(t_cor *cor, t_token *token);
-t_token		*store_label(t_cor *cor, t_token *label);
+t_token		*store_instruction(t_cor *cor, t_token *token, int *error);
+t_token		*store_label(t_cor *cor, t_token *label, int *error);
 t_token		*store_cmd(t_cor *cor, t_token *token);
-t_token		*store_params(t_cor *cor, t_token *token);
+t_token		*store_params(t_cor *cor, t_token *token, int *error);
 int			last_offsets(t_cor *cor);
 int			offsets(t_cor *cor, t_token *token, size_t nb_bytes);
 t_token		*store_comment(t_cor *cor, t_token *token);
 t_token		*store_name(t_cor *cor, t_token *token);
-void		write_prog(t_cor *cor, int add, size_t nb_bytes);
+int			write_prog(t_cor *cor, int add, size_t nb_bytes, int *error);
 int			process_tokens(t_cor *cor);
 int			instr_params(t_cor *cor, t_token *token, size_t nb_arg);
 
@@ -137,14 +137,15 @@ int			separating_char(char c);
 /*
 ** Output
 */
-char	*create_cor_file(t_cor *cor);
+char		*create_cor_file(t_cor *cor, int *error);
 
 /*
 ** Free
 */
-void	free_all(t_cor *cor);
+int			free_all(t_cor *cor, int error);
 
 //display_tokens
-void			display_tokens(t_token *tokens);
+char			*id_token(t_token *token);
+void		display_tokens(t_token *tokens);
 
 #endif

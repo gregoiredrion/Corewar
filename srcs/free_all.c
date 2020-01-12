@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 21:06:15 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/11 21:53:15 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/12 19:20:37 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	free_offsets(t_cor *cor)
 		tmp->start = 0;
 		tmp->pos = 0;
 		tmp->nb_bytes = 0;
-		free(tmp);//memdel?
+		free(tmp);
 	}
 	cor->offset = NULL;
 }
@@ -62,12 +62,12 @@ static void	free_tokens(t_cor *cor)
 		tmp->type = 0;
 		tmp->col = 0;
 		tmp->line = 0;
-		free(tmp);//memdel?
+		free(tmp);
 	}
 	cor->tokens = NULL;
 }
 
-void		free_all(t_cor *cor)
+int				free_all(t_cor *cor, int error)
 {
 	free_tokens(cor);
 	free_labels(cor);
@@ -76,4 +76,7 @@ void		free_all(t_cor *cor)
 	ft_strdel(&cor->file);
 	ft_strdel(&cor->name);
 	cor = NULL;
+	if (error == -1)
+		return (error_msg(error));
+	return (error);
 }
