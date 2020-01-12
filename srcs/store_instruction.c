@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 19:41:23 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/11 22:20:20 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/12 18:00:48 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,6 @@ t_token			*store_instruction(t_cor *cor, t_token *token)
 	if (!instr_params(cor, token->next, cor->op.nb_arg))
 		return (NULL);
 	if (cor->op.code_octet)
-		write_prog(cor, (char)total_arg(cor->tab, cor->op.nb_arg), 1);
+		write_prog(cor, total_arg(cor->tab, cor->op.nb_arg), 1);
 	return (store_params(cor, token->next));
 }

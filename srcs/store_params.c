@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 19:40:33 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/11 01:10:06 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/12 18:42:16 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,17 @@ static int	write_param(t_cor *cor, t_token *param, size_t nb_bytes)
 	if (param->type & T_LAB)
 		return (offsets(cor, param, nb_bytes));
 	if (nb_bytes == 1)
-		write_prog(cor, (char)ft_atoi(param->str + 1), 1);
+		output = (char)ft_atoi(param->str + 1);
 	else if (nb_bytes == 2)
 	{
 		if (param->type & T_DIR)
 			output = (short)ft_atoi(param->str + 1);
 		else
 			output = (short)ft_atoi(param->str);
-		write_prog(cor, (short)output, 2);
 	}
 	else
-	{
 		output = ft_atoi(param->str + 1);
-		write_prog(cor, output, 4);
-	}
+	write_prog(cor, output, nb_bytes);
 	return (OK);
 }
 
