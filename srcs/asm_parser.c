@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 16:19:12 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/12 01:31:26 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/12 01:34:21 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ int				asm_parser(t_cor *cor, char *file)
 		if ((add = skip_nl(cor, cor->file + i, &(cor->line), &col)) == -1)
 			return (MALLOC_ERROR);
 		i += add;
-		if (!(add = tokenization(cor, cor->file + i, &col, cor->line)))
-			return (ERROR);
+		if ((add = tokenization(cor, cor->file + i, &col, cor->line)) < 1)
+			return (add);
 		i += add;
 	}
 	close(cor->fd);
