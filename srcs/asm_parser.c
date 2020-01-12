@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 16:19:12 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/12 01:34:21 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/12 22:51:41 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ static int		stock_fd(t_cor *cor, char *file)
 	char	buffer[BUFF_SIZE + 1];
 
 	if ((cor->fd = open(file, O_RDONLY)) == -1)
+	{
+		write (2, "Could not open sourcefile \n", 27);
 		return (ERROR);
+	}
 	while ((ret = read(cor->fd, buffer, BUFF_SIZE)) > 0)
 	{
 		buffer[ret] = '\0';
