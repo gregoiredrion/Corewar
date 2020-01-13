@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:25:25 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/13 18:08:49 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/13 21:02:34 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ static int		get_dir_label(char *input, size_t *n)
 	size_t	i;
 
 	i = 2;
-	if (separating_char(input[i]))
-		return (ERROR);
 	while (is_labelchar(input[i]))
 		i++;
+	if (i == 2)
+		return (ERROR);
 	*n = i;
 	return (T_LAB | T_DIR);
 }
