@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:30:56 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/12 20:07:34 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/13 20:46:07 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int				last_offsets(t_cor *cor)
 	t_offset	*offset;
 	t_label		*label;
 	size_t		i;
+	char		*type;
 
 	offset = cor->offset;
 	while (offset)
@@ -49,9 +50,11 @@ int				last_offsets(t_cor *cor)
 		i = (offset->name[0] == DIRECT_CHAR) ? 2 : 1;
 		if (!(label = find_label(offset->name, cor->labels)))
 		{
+			type = (offset->name[0] == DIRECT_CHAR)
+				? "DIRECT_LABEL" : "INDIRECT_LABEL";
 			ft_printf("No such label %s while attempting to dereference token "
-			"[TOKEN][%03d:%03d] DIRECT_LABEL \"%s\"\n", offset->name + i,
-			offset->token->line, offset->token->col, offset->name);
+			"[TOKEN][%03d:%03d] %s \"%s\"\n", offset->name + i,
+			offset->token->line, offset->token->col, type, offset->name);
 			return (ERROR);
 		}
 		process_offset(cor, label, offset);

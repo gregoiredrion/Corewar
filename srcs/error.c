@@ -6,57 +6,29 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 15:38:32 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/13 18:03:03 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/13 21:21:34 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-char		*type_to_str(int type)
-{//add indirect & direct label
+static char	*type_to_str(int type)
+{
 	if (type == T_REG)
-		return (ft_strdup("register"));
-	//else if (type == T_DIR + T_LAB)    ->only for some errors
-		//return (ft_strdup("direct_label"));
-	//else if (type == T_IND + T_LAB)
-		//return (ft_strdup("indirect_label"));
+		return ("register");
 	else if (type & T_DIR)
-		return (ft_strdup("direct"));
-	else if (type & T_IND)
-		return (ft_strdup("indirect"));
-	else if (type == T_LAB)
-		return (ft_strdup("label"));
-	else if (type == T_NAM)
-		return (ft_strdup("command_name"));
-	else if (type == T_CMT)
-		return (ft_strdup("command_comment"));
-	else if (type == T_STR)
-		return (ft_strdup("string"));
-	else if (type == T_INS)
-		return (ft_strdup("instruction"));
-	else if (type == T_SEP)
-		return (ft_strdup("separator"));
-	else if (type == T_NEW)
-		return (ft_strdup("endline"));
-	else if (type == T_EOF)
-		return (ft_strdup("end"));
-	return (NULL);
+		return ("direct");
+	else
+		return ("indirect");
 }
 
 int			invalid_param(char *instr, int error, int type, size_t pos)
 {
-	char	*tmp;
-
 	ft_printf("Invalid parameter ");
 	if (error == NB_ARG)
 		ft_printf("count ");
 	else
-	{
-		if (!(tmp = type_to_str(type)))
-			return (MALLOC_ERROR);
-		ft_printf("%d type %s ", pos, tmp);
-		ft_strdel(&tmp);
-	}
+		ft_printf("%d type %s ", pos, type_to_str(type));
 	ft_printf("for instruction %s\n", instr);
 	return (ERROR);
 }
@@ -68,29 +40,9 @@ int			lexical_error(size_t line, size_t col, char *token_string)
 	return (ERROR);
 }
 
-t_token		*syntax_error(t_token *token)
-{
-	char	*tmp;
-
-	if (!(tmp = type_to_str(token->type)))
-		return (NULL);
-	tmp = ft_str_to_upper(tmp);
-	if (token->type == T_NEW)
-		ft_printf("Syntax error at token [TOKEN][%03d:%03d] %s\n", token->line,
-		token->col, tmp);
-	else if (token->type == T_EOF)
-		ft_printf("Syntax error at token [TOKEN][%03d:%03d] %s \"(null)\"\n",
-		token->line, token->col, tmp);
-	else
-		ft_printf("Syntax error at token [TOKEN][%03d:%03d] %s \"%s\"\n",
-		token->line, token->col, tmp, token->str);
-	ft_strdel(&tmp);
-	return (NULL);
-}
-
 t_token		*invalid_instr(t_token *token)
 {
 	ft_printf("Invalid instruction at token [TOKEN][%03d:%03d] INSTRUCTION"
-		" \"%s\"\n", token->line, token->col, token->str);
+	" \"%s\"\n", token->line, token->col, token->str);
 	return (NULL);
 }

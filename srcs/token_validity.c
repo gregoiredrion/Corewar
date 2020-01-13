@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/29 18:31:19 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/13 18:09:09 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/13 21:55:54 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static t_token		*param_token(t_token *token, int type)
 			else if (token->type == T_SEP)
 				return (syntax_error(token->next));
 			else if (!(token->type == T_NEW))
-				return (syntax_error(token));//special syntax error
+				return (syntax_newline());//special syntax error
 		}
 	}
 	else
