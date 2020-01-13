@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 18:43:49 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/12 22:26:12 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/13 17:00:46 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,7 @@ char		*create_cor_file(t_cor *cor, int *error)
 		write(2, "Could not close .cor file\n", 26);
 		return (NULL);
 	}
+	ft_printf("Writing output program to %s\n", name);
+	ft_strdel(&name);
 	return (name);
 }

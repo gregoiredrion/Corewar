@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 15:38:32 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/12 19:37:18 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/13 18:03:03 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@ char		*type_to_str(int type)
 		return (ft_strdup("indirect"));
 	else if (type == T_LAB)
 		return (ft_strdup("label"));
-	else if (type & (T_CMT | T_NAM))
+	else if (type == T_NAM)
 		return (ft_strdup("command_name"));
+	else if (type == T_CMT)
+		return (ft_strdup("command_comment"));
 	else if (type == T_STR)
 		return (ft_strdup("string"));
 	else if (type == T_INS)
@@ -36,6 +38,8 @@ char		*type_to_str(int type)
 		return (ft_strdup("separator"));
 	else if (type == T_NEW)
 		return (ft_strdup("endline"));
+	else if (type == T_EOF)
+		return (ft_strdup("end"));
 	return (NULL);
 }
 
@@ -57,8 +61,9 @@ int			invalid_param(char *instr, int error, int type, size_t pos)
 	return (ERROR);
 }
 
-int			lexical_error(size_t line, size_t col)
+int			lexical_error(size_t line, size_t col, char *token_string)
 {
+	ft_strdel(&token_string);
 	ft_printf("Lexical error at [%d:%d]\n", line, col);
 	return (ERROR);
 }
@@ -73,6 +78,9 @@ t_token		*syntax_error(t_token *token)
 	if (token->type == T_NEW)
 		ft_printf("Syntax error at token [TOKEN][%03d:%03d] %s\n", token->line,
 		token->col, tmp);
+	else if (token->type == T_EOF)
+		ft_printf("Syntax error at token [TOKEN][%03d:%03d] %s \"(null)\"\n",
+		token->line, token->col, tmp);
 	else
 		ft_printf("Syntax error at token [TOKEN][%03d:%03d] %s \"%s\"\n",
 		token->line, token->col, tmp, token->str);

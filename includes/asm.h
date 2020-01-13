@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 15:27:46 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/12 22:42:22 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/13 17:18:58 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int				upper(char *str);
 */
 int				usage(void);
 int				invalid_param(char *instr, int error, int type, size_t pos);
-int				lexical_error(size_t line, size_t col);
+int				lexical_error(size_t line, size_t col, char *token_string);
 t_token			*syntax_error(t_token *token);
 t_token			*invalid_instr(t_token *token);
 int				error_msg(int ret);

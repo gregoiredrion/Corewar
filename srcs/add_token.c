@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 16:02:31 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/12 19:23:42 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/13 17:18:44 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int				tokenization(t_cor *cor, char *input, size_t *col, size_t line)
 	if (type & (T_NAM | T_CMT))
 		get_cmd_type(&type, token_string);
 	if (type == 0)
-		return (lexical_error(line, *col));
+		return (lexical_error(line, *col, token_string));
 	if (!(token = create_token(token_string, type, *col, line)))
 		return (MALLOC_ERROR);
 	pushback_token(cor, token);

@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 16:37:59 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/12 22:22:54 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/13 18:14:29 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,15 @@ int		main(int argc, char **argv)
 	if (!(cor.prog = malloc(sizeof(char) * cor.max)))
 		return (error_msg(MALLOC_ERROR));
 	cor.header.magic = reverse_int32(COREWAR_EXEC_MAGIC);
-	if (asm_parser(&cor, argv[1]) < 1)
-		return (0);
+	if ((ret = asm_parser(&cor, argv[1]) < 1))
+		return (free_all(&cor, ret));
 	cor.size = 0;
 	if ((ret = token_validity(&cor)) < 1)
 		return (free_all(&cor, ret));
 	if ((ret = process_tokens(&cor) < 1))
 		return (free_all(&cor, ret));
 	cor.header.prog_size = reverse_int32(cor.size);
-	if (!(cor.name = create_cor_file(&cor, &ret)))
+	if (!create_cor_file(&cor, &ret))
 		return (free_all(&cor, ret));
-	ft_printf("Writing output program to %s\n", cor.name);
 	return (free_all(&cor, OK));
 }

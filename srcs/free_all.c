@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 21:06:15 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/12 22:52:06 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/13 17:04:27 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ int			free_all(t_cor *cor, int error)
 	free_offsets(cor);
 	ft_strdel(&cor->prog);
 	ft_strdel(&cor->file);
-	if (error == OK)
-		ft_strdel(&cor->name);
 	cor = NULL;
 	if (error == -1)
 		return (error_msg(error));

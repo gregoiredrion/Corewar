@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 14:21:47 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/11 00:50:48 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/13 17:14:25 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int				skip_nl(t_cor *cor, char *input, size_t *line, size_t *col)
 				if (add_newline_token(cor, *(col) - 1, *line) == -1)
 					return (MALLOC_ERROR);
 			add++;
-			*col = 1;
+			*col = 0;
 			(*line)++;
 		}
 		else if (input[i] == '#')
