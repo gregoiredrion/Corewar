@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/29 18:31:19 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/14 00:09:07 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/14 00:37:21 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,5 @@ int					token_validity(t_cor *cor)
 		if (!(tokens = ending_token(tokens)))
 			return (ERROR);
 	}
-	display_tokens(cor->tokens);
 	return (OK);
 }

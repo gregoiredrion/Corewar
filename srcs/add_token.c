@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 16:02:31 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/13 22:04:37 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/14 00:33:37 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,15 @@ static void		update_cline(char *input, size_t *n, size_t *col, size_t *line)
 		*col += 1;
 }
 
-static char		*change_settings(char *s, size_t *n, size_t *col, size_t *line)
+static int		change_settings(t_cor *cor, char *s, size_t *n, size_t *col)
 {
-	update_cline(s, n, col, line);
-	*n = *n - 1;
-	return (s + 1);
+	t_token	*token;
+
+	token = create_token(NULL, T_STR, *col, cor->line);
+	update_cline(s, n, col, &cor->line);
+	token->str = ft_strndup(s + 1, *n - 1);
+	pushback_token(cor, token);
+	return (*n + 1);
 }
 
 int				tokenization(t_cor *cor, char *input, size_t *col, size_t *line)
@@ -61,7 +65,7 @@ int				tokenization(t_cor *cor, char *input, size_t *col, size_t *line)
 	type = get_type(input, &n);
 	i = n;
 	if (type == T_STR && i++)
-		input = change_settings(input, &n, col, line);
+		return (change_settings(cor, input, &n, col));
 	else if (type == T_EOF)
 		update_cline(input, &n, col, line);
 	if (!(token_string = ft_strndup(input, n)))
