@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 15:27:46 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/13 21:56:21 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/13 22:01:39 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ int				asm_parser(t_cor *cor, char *file);
 t_token			*create_token(char *input, int type, size_t col, size_t line);
 int				create_cor(t_cor *cor);
 int				skip_nl(t_cor *cor, char *input, size_t *line, size_t *col);
-int				tokenisation(char *input);
 int				check_ind(char *input, size_t i);
 int				check_label(char *input);
 int				check_cmd(char *input);
@@ -100,7 +99,7 @@ int				get_instr(char *input, size_t *n);
 int				get_reg(char *input, size_t *n);
 int				get_indir(char *input, size_t *n);
 int				get_type(char *input, size_t *n);
-int				tokenization(t_cor *cor, char *input, size_t *col, size_t line);
+int				tokenization(t_cor *cor, char *input, size_t *col, size_t *line);
 void			pushback_token(t_cor *cor, t_token *token);
 int				upper(char *str);
 
