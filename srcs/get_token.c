@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:25:25 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/13 21:02:34 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/14 00:10:25 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,14 @@
 static int		get_str(char *input, size_t *n)
 {
 	size_t		i;
+	static int	nb_str = 0;
 
 	i = 1;
 	while (input[i] && input[i] != '"')
 		i++;
 	*n = i;
-	if (!input[i])
+	nb_str++;
+	if (!input[i] && nb_str < 2)
 		return (T_EOF);
 	return (T_STR);
 }

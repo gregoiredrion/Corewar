@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:00:37 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/13 21:02:29 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/13 23:37:31 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	get_indir_label(char *input, size_t *n)
 	if (i == 1)
 		return (ERROR);
 	*n = i;
-	return (T_LAB | T_DIR);
+	return (T_LAB | T_IND);
 }
 
 int			get_indir(char *input, size_t *n)
