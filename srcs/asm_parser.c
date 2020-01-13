@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 16:19:12 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/13 22:33:22 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/13 23:47:18 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ static int		stock_fd(t_cor *cor, char *file)
 		cor->file = new;
 		cor->size += ret;
 	}
+	if (!cor->file)
+		cor->file = ft_strdup("");
 	return (ret == -1 ? MALLOC_ERROR : OK);
 }
 
