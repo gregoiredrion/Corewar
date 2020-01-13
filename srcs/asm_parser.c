@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 16:19:12 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/13 21:11:24 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/13 22:33:22 by gdrion           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int				asm_parser(t_cor *cor, char *file)
 	col = 1;
 	if ((add = stock_fd(cor, file)) < 1)
 		return (add);
-	while (i < cor->size)
+	while (i < cor->size + 1)
 	{
 		if ((add = skip_nl(cor, cor->file + i, &(cor->line), &col)) == -1)
 			return (MALLOC_ERROR);
