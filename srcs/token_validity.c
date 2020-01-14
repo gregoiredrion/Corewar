@@ -6,42 +6,11 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/29 18:31:19 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/14 01:24:30 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/14 03:05:41 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
-
-static t_token		*param_token(t_token *token, int type)
-{
-	if (type == T_INS)
-	{
-		if (!(token->type & (T_REG | T_DIR | T_IND)))
-			return (syntax_error(token));
-		while (!(token->type & (T_NEW | T_EOF)))
-		{
-			if (!(token->type & (T_REG | T_DIR | T_IND)))
-				return (syntax_error(token));
-			token = token->next;
-			if (token->type == T_SEP && token->next &&
-			token->next->type & (T_REG | T_DIR | T_IND))
-				token = token->next;
-			else if (token->type == T_SEP)
-				return (syntax_error(token->next));
-			else if (!(token->type == T_NEW))
-				return (syntax_newline());
-		}
-	}
-	else
-	{
-		if (token->type != T_STR)
-			return (syntax_error(token));
-		token = token->next;
-		if (token->type != T_NEW)
-			return (syntax_error(token));
-	}
-	return (token);
-}
 
 static t_token		*check_name_cmt(t_token *token)
 {

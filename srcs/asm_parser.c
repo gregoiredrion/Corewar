@@ -6,11 +6,17 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 16:19:12 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/13 23:47:18 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/14 02:47:02 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+static int		error_fd(char *file)
+{
+	ft_printf("Can't read source file %s\n", file);
+	return (ERROR);
+}
 
 static int		stock_fd(t_cor *cor, char *file)
 {
@@ -19,10 +25,7 @@ static int		stock_fd(t_cor *cor, char *file)
 	char	buffer[BUFF_SIZE + 1];
 
 	if ((cor->fd = open(file, O_RDONLY)) == -1)
-	{
-		ft_printf("Can't read source file %s\n", file);
-		return (ERROR);
-	}
+		return (error_fd(file));
 	while ((ret = read(cor->fd, buffer, BUFF_SIZE)) > 0)
 	{
 		buffer[ret] = '\0';

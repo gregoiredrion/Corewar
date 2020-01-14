@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 21:14:17 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/13 21:55:11 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/14 02:44:24 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ static char	*type_to_str(int type)
 		return ("SEPARATOR");
 	else if (type == T_NEW)
 		return ("ENDLINE");
-	else
-		return ("END");
+	return ("END");
 }
 
 t_token		*syntax_newline(void)

@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 15:27:46 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/13 22:01:39 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/14 03:05:20 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,19 +89,13 @@ int				asm_parser(t_cor *cor, char *file);
 t_token			*create_token(char *input, int type, size_t col, size_t line);
 int				create_cor(t_cor *cor);
 int				skip_nl(t_cor *cor, char *input, size_t *line, size_t *col);
-int				check_ind(char *input, size_t i);
-int				check_label(char *input);
-int				check_cmd(char *input);
-int				check_dir(char *input);
-int				check_reg_instr(char *input);
 int				token_validity(t_cor *cor);
 int				get_instr(char *input, size_t *n);
 int				get_reg(char *input, size_t *n);
 int				get_indir(char *input, size_t *n);
 int				get_type(char *input, size_t *n);
-int				tokenization(t_cor *cor, char *input, size_t *col, size_t *line);
+int				tokenization(t_cor *cor, char *str, size_t *col, size_t *line);
 void			pushback_token(t_cor *cor, t_token *token);
-int				upper(char *str);
 
 /*
 ** Error
@@ -126,6 +120,7 @@ int				offsets(t_cor *cor, t_token *token, size_t nb_bytes);
 int				write_prog(t_cor *cor, int add, size_t nb_bytes, int *error);
 int				process_tokens(t_cor *cor);
 int				instr_params(t_cor *cor, t_token *token, size_t nb_arg);
+t_token			*param_token(t_token *token, int type);
 
 /*
 ** Character authentification
@@ -143,9 +138,5 @@ char			*create_cor_file(t_cor *cor, int *error);
 ** Free
 */
 int				free_all(t_cor *cor, int error);
-
-//display_tokens
-char			*id_token(t_token *token);
-void			display_tokens(t_token *tokens);
 
 #endif
