@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/29 18:31:19 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/14 03:05:41 by wdeltenr         ###   ########.fr       */
+/*   Updated: 2020/01/14 03:18:26 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static t_token		*check_name_cmt(t_token *token)
 	static int	name = 0;
 	static int	cmt = 0;
 
-	if (token->type == T_LAB)
+	if (token->type & (T_LAB | T_INS))
 	{
 		if (cmt == 0 || name == 0)
 			return (syntax_error(token));
