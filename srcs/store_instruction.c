@@ -6,7 +6,7 @@
 /*   By: wdeltenr <wdeltenr@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 19:41:23 by wdeltenr          #+#    #+#             */
-/*   Updated: 2020/01/12 22:41:23 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/14 00:56:13 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static char		total_arg(t_arg_type arg_type[], size_t nb_arg)
 	i = 0;
 	while (i < 3)
 	{
+		if (arg_type[i] == T_IND)
+			arg_type[i] = IND_CODE;
 		if (i < nb_arg)
 			tot += arg_type[i];
 		tot <<= 2;
@@ -66,8 +68,10 @@ t_token			*store_instruction(t_cor *cor, t_token *token, int *error)
 	if (!instr_params(cor, token->next, cor->op.nb_arg))
 		return (NULL);
 	if (cor->op.code_octet)
+	{
 		if ((write_prog(cor, total_arg(cor->tab, cor->op.nb_arg), 1, error)) ==
 		-1)
 			return (NULL);
+	}
 	return (store_params(cor, token->next, error));
 }

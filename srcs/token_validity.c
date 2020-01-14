@@ -6,7 +6,7 @@
 /*   By: gdrion <gdrion@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/29 18:31:19 by gdrion            #+#    #+#             */
-/*   Updated: 2020/01/14 00:37:21 by gdrion           ###   ########.fr       */
+/*   Updated: 2020/01/14 01:24:30 by wdeltenr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,11 @@ int					token_validity(t_cor *cor)
 	t_token	*tokens;
 
 	tokens = cor->tokens;
+	if (tokens->type == T_EOF)
+	{
+		syntax_error(tokens);
+		return (ERROR);
+	}
 	while (tokens && tokens->type != T_EOF)
 	{
 		if (!(tokens = starting_token(tokens)))
