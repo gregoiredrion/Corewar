@@ -1,8 +1,0 @@
-vm_champs
-*.cor
-*.s
-asm
-obj
-a.out
-*dSYM
-libft.a
