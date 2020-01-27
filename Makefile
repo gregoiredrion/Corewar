@@ -1,64 +1,39 @@
-NAME = asm
-INCLUDES = includes/
-SRCS_DIR = srcs/
-OBJ_DIR = obj/
-LIBFT_DIR = libft/
-LIBFT_INCLUDES = libft/includes/
-LIBFT = libft/libft.a
-cc = gcc
-FLAGS = -Wall -Werror -Wextra
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: lode-spi <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2019/12/16 14:45:24 by lode-spi          #+#    #+#              #
+#    Updated: 2020/01/14 16:17:59 by lode-spi         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-FILES = $(shell find srcs -type f | grep -E ".c$$" | sed 's/srcs//g')
-SRCS = $(addprefix $(SRCS_DIR), $(FILES))
-OBJ = $(addprefix $(OBJ_DIR), $(FILES:.c=.o))
-WIDTH = $(shell echo $(notdir $(SRCS)) | tr " " "\n" | \
-	awk ' { if ( length > x ) { x = length; y = $$0 } }END{ print y }'| wc -c)
+NAME = corewar
+VMDIR = vm
+ASMDIR = asm
 
-ccRED = "\e[1;31m"
-ccGREEN = "\e[1;32m"
-ccBLUE = "\e[1;34m"
-ccWHITE = "\e[1;37m"
-ccRESET = "\e[0;0m"
+include corewar.mk
 
-all: lib $(NAME)
+all: $(NAME)
 
-lib:
-	@make -C $(LIBFT_DIR)
+$(NAME) : $(VMDIR)/corewar $(ASMDIR)/asm
 
-$(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c $(INCLUDES)/asm.h Makefile
-	@tput civis
-	@printf $(ccBLUE)
-	@printf "Compiling %-$(WIDTH)s" $(notdir $<)
-	@$(cc) $(FLAGS) -o $@ -c $< -I $(INCLUDES) -I $(LIBFT_INCLUDES)
-	@printf $(ccRESET)
-	@printf "\r"
+$(VMDIR)/corewar: $(VM_SRC) $(VMDIR)/Makefile $(VMDIR)/includes/corewar.h
+	@make -C vm/
 
-$(OBJ_DIR):
-	@mkdir $@
-
-$(NAME): $(OBJ_DIR) $(OBJ) Makefile
-	@printf $(ccGREEN)
-	@$(cc) $(FLAGS) $(OBJ) -I $(INCLUDES) -I $(LIBFT_INCLUDES) $(LIBFT) \
-	-o $(NAME)
-	@printf "Successfully compiled %-$(WIDTH)s" $(NAME)
-	@printf "                                                    \n"
-	@printf $(ccRESET)
-	@tput cnorm
+$(ASMDIR)/asm: $(ASM_SRC) $(ASMDIR)/Makefile $(ASMDIR)/includes/asm.h
+	@make -C asm/
 
 clean:
-	@printf $(ccRED)
-	@rm -rf $(OBJ_DIR)
-	@printf "Successfully deleted $(OBJ_DIR)\n"
-	@make clean -C $(LIBFT_DIR)
-	@printf $(ccRESET)
+	@make -C vm/ clean
+	@make -C asm/ clean
 
 fclean: clean
-	@printf $(ccRED)
-	@rm -f $(NAME)
-	@printf "Successfully deleted $(NAME)\n"
-	@make fclean -C $(LIBFT_DIR)
-	@printf $(ccRESET)
+	@make -C vm/ fclean
+	@make -C asm/ fclean
 
-re: fclean all
+re : fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all $(VM_SRC) $(ASM_SRC)
