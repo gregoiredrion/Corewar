@@ -9,7 +9,8 @@ The VM executes the binary code in a "Virtual Machine" and displays how the figh
 Use the make command to compile
 
 ASM :
-./asm file\
+./asm file
+
 Compiles an asm file int a .cor file
 
 VM :
