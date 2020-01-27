@@ -9,13 +9,12 @@ The VM executes the binary code in a "Virtual Machine" and displays how the figh
 Use the make command to compile
 
 ASM :
-./asm file
-- There is no flags
+./asm file\
 Compiles an asm file int a .cor file
 
 VM :
 ./corewar gives you usage
-- -v for visual display
+- -v for visual display\
 Compiles .cor file(s) and runs a battle between the champions
 
 ## Authors :
