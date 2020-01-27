@@ -18,7 +18,7 @@ VM :
 Compiles .cor file(s) and runs a battle between the champions
 
 ## Authors :
-- **Louis de Spiegelaere** 	[louisdespi](https://github.com/louisdespi)
-- **Gregoire Drion** 		[gregoiredrion](https://github.com/gregoiredrion)
-- **William Deltenre** 		[wdeltenr](https://github.com/wdeltenre)
-- **Alexandre Gilmet**
+- **Louis de Spiegelaere** 	- VM - [louisdespi](https://github.com/louisdespi)
+- **Gregoire Drion** 		- ASM -[gregoiredrion](https://github.com/gregoiredrion)
+- **William Deltenre** 		- ASM -[wdeltenr](https://github.com/wdeltenre)
+- **Alexandre Gilmet**      - VM -
