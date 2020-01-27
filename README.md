@@ -14,7 +14,8 @@ Compiles an asm file int a .cor file
 
 VM :
 ./corewar gives you usage
-- -v for visual display\
+- -v for visual display
+
 Compiles .cor file(s) and runs a battle between the champions
 
 ## Authors :
